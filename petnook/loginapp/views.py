@@ -12,13 +12,16 @@ def customer_register(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        confirm_password = request.POST.get('confirmPassword')
         roles=request.POST.get('role',None)
-
-        if email and password and roles:
+        if CustomUser.objects.filter(email=email).exists():
+            messages.error(request,"Email is already registered.")
+        elif password!=confirm_password:
+            messages.error(request,"password not match")
+        elif email and password and roles:
             
-            if CustomUser.objects.filter(email=email).exists():
-                messages.error(request,"Email is already registered.")
-                return redirect('login')
+           
+                # return redirect('login')
             user = CustomUser(name=name, email=email) 
             user.set_password(password) 
              
@@ -26,7 +29,7 @@ def customer_register(request):
                 user.is_customer = True 
             user.save() 
             messages.success(request, "Registered as a customer successfully") 
-            return redirect('/')  # Redirect to homepage or thank-you page 
+            return redirect('login')  # Redirect to homepage or thank-you page 
          
         else: 
 
@@ -44,7 +47,7 @@ def seller_register(request):
          
         if email and password and roles: 
             if CustomUser.objects.filter(email=email).exists(): 
-                messages.error(request, "Email already exists") 
+                # messages.error(request, "Email already exists") 
                 return redirect('seller_register') 
              
             user = CustomUser(name=name, email=email) 
@@ -54,7 +57,7 @@ def seller_register(request):
                 user.is_seller = True 
             user.save() 
             messages.success(request, "Registered as a seller successfully") 
-            return redirect('/')  # Redirect to homepage or thank-you page 
+            return redirect('login')  # Redirect to homepage or thank-you page 
          
         else: 
             messages.error(request, "Missing required fields") 

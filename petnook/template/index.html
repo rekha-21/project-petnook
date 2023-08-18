@@ -44,9 +44,9 @@
 
 	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
 			  
-			  <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
+			  {% comment %} <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"> {% endcomment %}
 				
-				<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
+				{% comment %} <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px">  {% endcomment %}
 			  </li>
 			  
 
@@ -80,8 +80,12 @@
 			
 			<li><a href="#" class="nav-link ml-4"><b>{{user.name}}</b></a></li>
 			{% if  user.is_authenticated %}
-                                            <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
-                                    {% endif %}
+            <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
+			{% else %}
+			<li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
+			<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
+
+            {% endif %}
 			</ul>
 		  </div>
 		</div>

@@ -88,6 +88,11 @@
     <input type="hidden" name="role" value="customer">
      
     </div>
+    {% if messages %}
+  {% for message in messages %}
+  <div>{{message}}</div>
+  {% endfor %}
+  {% endif %}
     <button class="register-button" type="submit">Register</button>
      <p style="margin-top: -30px; text-align: center;">Already have an account? <a href="{% url 'login' %}">Log in</a></p> 
   </form>
@@ -111,13 +116,14 @@
     }
   });
 
-  emailInput.addEventListener('input', function() {
+   emailInput.addEventListener('input', function() {
     if (!emailInput.validity.valid) {
       document.getElementById('email-error').textContent = 'Invalid email format';
-    } else {
+    } 
+      else {
       document.getElementById('email-error').textContent = '';
     }
-  });
+  }); 
 
   passwordInput.addEventListener('input', function() {
     const password = passwordInput.value;
