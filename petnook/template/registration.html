@@ -1,0 +1,142 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  .form-container {
+    width: 700px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    position: relative;
+  }
+  .form-container input {
+    width: 50%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  .form-container label {
+    font-weight: bold;
+  }
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .register-button {
+    width: 25%; /* Full width */
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  .register-button:hover {
+    background-color: #0056b3;
+  }
+  .image-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding:50px;
+  }
+  .image {
+    max-width: 300%;
+    height: 300p;
+  }
+</style>
+</head>
+<body>
+<div class="form-container">
+  <h1 style="text-align: left;">Sign up</h1><br>
+  <form id="registration-form" method="POST">
+    {% csrf_token %}
+    <input type="text" id="name" name="name" placeholder="Name" required>
+    <div class="error" id="username-error"></div><br>
+    
+    <input type="email" id="email" name="email" placeholder="Email" required>
+    <div class="error" id="email-error"></div><br>
+   
+    <input type="password" id="password" name="password" placeholder="Password" required>
+    <div class="error" id="password-error"></div><br>
+   
+    <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm Password" required>
+    <div class="error" id="confirm-password-error"></div>
+    <div class="checkbox-container">
+      <div class="mb-3">   
+        <div class="form-outline mb-2"> 
+          <div class="d-flex align-items-center position-relative"><br>
+            
+    <input type="hidden" name="role" value="customer">
+     
+    </div>
+    <button class="register-button" type="submit">Register</button>
+     <p style="margin-top: -30px; text-align: center;">Already have an account? <a href="{% url 'login' %}">Log in</a></p> 
+  </form>
+  <div class="image-container">
+    <img class="image" src="{% static 'images\register.jpg' %}" alt="Image">
+  </div>
+</div>
+<script>
+  const usernameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const confirmPasswordInput = document.getElementById('confirm-password');
+  
+  usernameInput.addEventListener('input', function() {
+    if (usernameInput.value.trim() === '') {
+      document.getElementById('username-error').textContent = 'Username is required';
+    } else if (!/^[A-Za-z ]+$/.test(usernameInput.value)) {
+      document.getElementById('username-error').textContent = 'Username must only contain letters';
+    } else {
+      document.getElementById('username-error').textContent = '';
+    }
+  });
+
+  emailInput.addEventListener('input', function() {
+    if (!emailInput.validity.valid) {
+      document.getElementById('email-error').textContent = 'Invalid email format';
+    } else {
+      document.getElementById('email-error').textContent = '';
+    }
+  });
+
+  passwordInput.addEventListener('input', function() {
+    const password = passwordInput.value;
+    const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,}$/;
+
+    if (!regex.test(password)) {
+      document.getElementById('password-error').textContent = 'Password must be at least 8 characters long and include at least one capital letter, one special symbol, and one number';
+    } else {
+      document.getElementById('password-error').textContent = '';
+    }
+  });
+
+  confirmPasswordInput.addEventListener('input', function() {
+    if (confirmPasswordInput.value !== passwordInput.value) {
+      document.getElementById('confirm-password-error').textContent = 'Passwords do not match';
+    } else {
+      document.getElementById('confirm-password-error').textContent = '';
+    }
+  });
+</script>
+</body>
+</html>
