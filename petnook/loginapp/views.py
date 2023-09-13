@@ -3,7 +3,8 @@ from .models import CustomUser
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
-
+def landing(request):
+    return render(request,'landing.html')
 # Create your views here.
 def customer_register(request):
     #return render (request,'registration.html')
@@ -39,22 +40,22 @@ def customer_register(request):
 
 
 def seller_register(request): 
-    if request.method == 'POST': 
+    if request.method == 'POST':
         name = request.POST.get('name') 
         email = request.POST.get('email') 
         password = request.POST.get('password') 
-        roles = request.POST.get('role', None) 
+        print(name,email,password)
          
-        if email and password and roles: 
+        if email and password: 
+            print('Entered')
+
             if CustomUser.objects.filter(email=email).exists(): 
                 # messages.error(request, "Email already exists") 
                 return redirect('seller_register') 
              
             user = CustomUser(name=name, email=email) 
             user.set_password(password) 
-             
-            if roles == 'seller': 
-                user.is_seller = True 
+            user.is_seller = True 
             user.save() 
             messages.success(request, "Registered as a seller successfully") 
             return redirect('login')  # Redirect to homepage or thank-you page 
@@ -75,9 +76,24 @@ def login(request):
         user=auth.authenticate(email=email,password=password)
         print(user)
         if user is not None:
-            auth.login(request,user)
-            return redirect('/')
+            if user.is_customer==True:
+                auth.login(request,user)
+                print(user.is_customer)
+                return redirect('http://127.0.0.1:8000/registration/landing/')
+            elif user.is_seller==True:
+                auth.login(request,user)
+                return redirect('http://127.0.0.1:8000/sellerpage/')
+            else:
+                auth.login(request,user)
+                return redirect('http://127.0.0.1:8000/registration/landing/')
+
     return render (request,'login.html')
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    if request.user.is_authenticated and request.user.is_seller:
+        return redirect('sellerhttp://127.0.0.1:8000/seller/')
+    else:
+        return redirect('/')
+
+def about(request):
+    return render(request,'about.html')

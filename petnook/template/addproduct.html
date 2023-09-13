@@ -1,0 +1,226 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Product Listing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            display: grid;
+            grid-gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #2b8c37;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #1d1f1d;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="container">
+        <h2>Add a Pet Product</h2>
+        <<form method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}>
+            <label for="productName">Product Name:</label>
+            <input type="text" id="product_name" name="product_name" required>
+
+            <label for="productDescription">Product Description:</label>
+            <textarea id="product_description" name="product_description" rows="4" required></textarea>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" min="0" step="0.01" required>
+
+            <label for="productImage">Product Image:</label>
+            <input type="file" id="product_images1" name="product_images1" required>
+            <label for="productImage">Product Image:</label>
+            <input type="file" id="product_images2" name="product_images2" required>
+            <label for="productImage">Product Image:</label>
+            <input type="file" id="product_images3" name="product_images3" required>
+
+
+            <label for="productCategory">Product Category:</label>
+            <select id="category" name="category" required>
+                <option value="food">Food & Treats</option>
+                <option value="clothes">Clothes & Grooming</option>
+                <option value="collar">Collars & Leashes</option>
+                <option value="cages">Cages</option>
+                <option value="toys">Pet Toys</option>
+                <option value="collar">Pet Bowls</option>
+                <!-- Add more options as needed -->
+            </select>
+
+            <label for="brand">Brand:</label>
+            <input type="text" id="brand_name" name="brand_name">
+
+            <label for="sizeQuantity">Size/Quantity:</label>
+            <input type="number" id="sizeQuantity" name="sizeQuantity">
+
+            
+            <label for="petCompatibility">Pet Compatibility:</label>
+            <select id="petcompatibility" name="petcompatibility" required>
+                <option value="dogs">Dogs</option>
+                <option value="cats">Cats</option>
+                <option value="birds">Birds</option>
+               
+                <!-- Add more options as needed -->
+            </select>
+            
+
+            <label for="ageSizeSuitability">Age/Size Suitability:</label>
+            <input type="text" id="agesizesuitability" name="agesizesuitability">
+
+           
+
+           
+
+            <label for="colorsVariations">Colors/Variations:</label>
+            <input type="text" id="colorsvariations" name="colorsvariations">
+
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+    
+    <script>
+        const form = document.getElementById('product-form');
+        const productNameInput = document.getElementById('productName');
+        const productDescriptionInput = document.getElementById('productDescription');
+        const priceInput = document.getElementById('price');
+        const productImageInput = document.getElementById('productImage');
+        const productCategoryInput = document.getElementById('productCategory');
+
+        const productNameError = document.getElementById('productName-error');
+        const productDescriptionError = document.getElementById('productDescription-error');
+        const priceError = document.getElementById('price-error');
+        const productImageError = document.getElementById('productImage-error');
+        const productCategoryError = document.getElementById('productCategory-error');
+
+        document.getElementById('submit-button').addEventListener('click', function () {
+            validateProductName();
+            validateProductDescription();
+            validatePrice();
+            validateProductImage();
+            validateProductCategory();
+
+            // You can add similar validation functions for other fields here
+
+            if (
+                !productNameError.textContent &&
+                !productDescriptionError.textContent &&
+                !priceError.textContent &&
+                !productImageError.textContent &&
+                !productCategoryError.textContent
+            ) {
+                // If all fields are valid, submit the form
+                form.submit();
+            }
+        });
+
+        function validateProductName() {
+            const value = productNameInput.value.trim();
+            if (value === '') {
+                productNameError.textContent = 'Product Name is required';
+            } else {
+                productNameError.textContent = '';
+            }
+        }
+
+        function validateProductDescription() {
+            const value = productDescriptionInput.value.trim();
+            if (value === '') {
+                productDescriptionError.textContent = 'Product Description is required';
+            } else {
+                productDescriptionError.textContent = '';
+            }
+        }
+
+        function validatePrice() {
+            const value = priceInput.value;
+            if (isNaN(value) || value < 0) {
+                priceError.textContent = 'Price must be a positive number';
+            } else {
+                priceError.textContent = '';
+            }
+        }
+
+        function validateProductImage() {
+            const value = productImageInput.value.trim();
+            if (value === '') {
+                productImageError.textContent = 'Product Image URL is required';
+            } else {
+                productImageError.textContent = '';
+            }
+        }
+
+        function validateProductCategory() {
+            const value = productCategoryInput.value;
+            if (value === '') {
+                productCategoryError.textContent = 'Product Category is required';
+            } else {
+                productCategoryError.textContent = '';
+            }
+        }
+
+        // You can add similar validation functions for other fields here
+
+    </script>
+
+
+
+
+
+</body>
+</html>

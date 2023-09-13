@@ -1,0 +1,1148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pet Sitting - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+  <style>
+	.profile-icon {
+		position: relative;
+		display: inline-block;
+		cursor: pointer;
+	  }
+	  
+	  .profile-icon img {
+		width: 30px; /* Adjust the size of the profile picture as needed */
+		height: 30px;
+		border-radius: 50%;
+	  }
+	  
+	  .dropdown-menu {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		background-color: #fff;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		display: none;
+	  }
+	  
+	  .dropdown-menu ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	  }
+	  
+	  .dropdown-menu li {
+		padding: 10px;
+	  }
+	  
+	  .dropdown-menu a {
+		text-decoration: none;
+		color: #333;
+		display: block;
+	  }
+	  
+	  /* Show the dropdown menu when hovering over the profile icon */
+	  .profile-icon:hover .dropdown-menu {
+		display: block;
+	  }
+	  
+  </style>
+    
+
+	  {% if  user.is_authenticated %}
+	  {% if  user.is_customer == True %}
+	  
+				
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>PETNOOK</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="fa fa-bars"></span> Menu
+			  </button>
+			  <div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+					
+					<li class="nav-item"><a href="{% url 'customerproduct' %}" class="nav-link">Product</a></li>
+				  
+				  <li class="nav-item text-primary"><a href="" class="nav-link">Services</a></li>
+	
+				  <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+				  
+				  </li>
+				  
+	
+	
+			  </div>
+			</div>
+		  </nav>
+		<!-- END nav -->
+		
+		<nav class="navbar navbar-expand-lg bg-light " style="10px;padding-left:500px;">
+			<div class="container">
+			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+			  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					
+				<form class="d-flex" role="search">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"style="width:400px; position: relative; left: -90px;">
+					<button class="btn btn-outline-success " style="height:50px;position: relative; left: -80px; " type="submit">Search</button>
+				  </form>
+				  
+				  <li><a href="#" class="nav-link ml-4">
+					<img src="{% static 'images/heart.jpg' %}" alt="" style="height: 20px;position: relative; left: -80px;">
+				</a></li>
+				  <li><a href="#" class="nav-link ml-4">
+					<img src="{% static 'images/cart.png' %}" alt="" style="height: 20px;position: relative; left: -80px;">
+				</a></li>
+				
+				{% if  user.is_authenticated %}
+				<div class="profile-icon" style="position: relative; left: -50px; top: 10px;">
+					<li><img src="{% static 'images/profile.png' %}" alt="Profile Picture" style=" margin-bottom: 20px;"></li>
+					<div class="dropdown-menu" style="margin-top: -25px; margin-bottom: -40px;">
+						<ul>
+							<li><a href="#" style="font-size: 16px; text-align: left; margin-bottom: -20px;"><b>{{user.name}}</b></a></li>
+							<li><a href="{% url 'profile' %}" style="font-size: 14px; text-align: left; margin-bottom: -20px;">Profile</a></li>
+							<li><a href="{% url 'logout' %}" style="font-size: 14px; text-align: left; margin-bottom: -20px;">Log Out</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				
+				{% comment %} <li><a href="#" class="nav-link ml-4"><b>{{user.name}}</b></a></li> {% endcomment %}
+				
+				<button type="button" class="btn btn-success mr-5" style="border-radius: 50%; position: relative; left: -50px;"" >
+					<a href="{% url 'seller' %}" class="nav-link text-light" >
+						Start Selling
+					</a>
+				</button>
+				{% else %}
+				<li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"></li>
+				<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
+				{% endif %}
+			   
+				
+			
+				</ul>
+				
+				
+			  </div>
+			</div>
+			
+		  </nav>
+  
+	<div class="hero-wrap js-fullheight" style="background-image: url('{% static 'images/bg_1.jpg' %}');" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-11 ftco-animate text-center">
+          	<h1 class="mb-4">Highest Quality Care For Pets You'll Love </h1>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section bg-light ftco-no-pt ftco-intro">
+    	<div class="container">
+    		<div class="row">
+          <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+            <div class="d-block services active text-center">
+              <div class="icon d-flex align-items-center justify-content-center">
+            		<span class="flaticon-blind"></span>
+              </div>
+              <div class="media-body">
+                <h3 class="heading">Dog Walking</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
+                <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+            <div class="d-block services text-center">
+              <div class="icon d-flex align-items-center justify-content-center">
+            		<span class="flaticon-dog-eating"></span>
+              </div>
+              <div class="media-body">
+                <h3 class="heading">Pet Daycare</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
+                <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+              </div>
+            </div>    
+          </div>
+          <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+            <div class="d-block services text-center">
+              <div class="icon d-flex align-items-center justify-content-center">
+            		<span class="flaticon-grooming"></span>
+              </div>
+              <div class="media-body">
+                <h3 class="heading">Pet Grooming</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
+                <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+              </div>
+            </div>      
+          </div>
+        </div>
+    	</div>
+    </section>
+
+    <section class="ftco-section ftco-no-pt ftco-no-pb">
+    	<div class="container">
+    		<div class="row d-flex no-gutters">
+    			<div class="col-md-5 d-flex">
+    				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="background-image:url({% static 'images/about-1.jpg' %});">
+    				</div>
+    			</div>
+    			<div class="col-md-7 pl-md-5 py-md-5">
+    				<div class="heading-section pt-md-5">
+	            <h2 class="mb-4">Why Choose Us?</h2>
+    				</div>
+    				<div class="row">
+	    				<div class="col-md-6 services-2 w-100 d-flex">
+	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-stethoscope"></span></div>
+	    					<div class="text pl-3">
+	    						<h4>Care Advices</h4>
+	    						<p>Far far away, behind the word mountains, far from the countries.</p>
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6 services-2 w-100 d-flex">
+	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-customer-service"></span></div>
+	    					<div class="text pl-3">
+	    						<h4>Customer Supports</h4>
+	    						<p>Far far away, behind the word mountains, far from the countries.</p>
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6 services-2 w-100 d-flex">
+	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-emergency-call"></span></div>
+	    					<div class="text pl-3">
+	    						<h4>Emergency Services</h4>
+	    						<p>Far far away, behind the word mountains, far from the countries.</p>
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6 services-2 w-100 d-flex">
+	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-veterinarian"></span></div>
+	    					<div class="text pl-3">
+	    						<h4>Veterinary Help</h4>
+	    						<p>Far far away, behind the word mountains, far from the countries.</p>
+	    					</div>
+	    				</div>
+	    			</div>
+	        </div>
+        </div>
+    	</div>
+    </section>
+
+    
+
+    <section class="ftco-section bg-light ftco-faqs">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-lg-6 order-md-last">
+    				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="background-image:url({% static 'images/about.jpg' %});">
+    					<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
+    						<span class="fa fa-play"></span>
+    					</a>
+    				</div>
+    				<div class="d-flex mt-3">
+    					<div class="img img-2 mr-md-2" style="background-image:url({% static 'images/about-2.jpg' %});"></div>
+    					<div class="img img-2 ml-md-2" style="background-image:url({% static 'images/about-3.jpg' %});"></div>
+    				</div>
+    			</div>
+
+    			<div class="col-lg-6">
+    				<div class="heading-section mb-5 mt-5 mt-lg-0">
+	            <h2 class="mb-3">Frequently Asks Questions</h2>
+	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+    				</div>
+    				<div id="accordion" class="myaccordion w-100" aria-multiselectable="true">
+						  <div class="card">
+						    <div class="card-header p-0" id="headingOne">
+						      <h2 class="mb-0">
+						        <button href="#collapseOne" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+						        	<p class="mb-0">How to train your pet dog?</p>
+						          <i class="fa" aria-hidden="true"></i>
+						        </button>
+						      </h2>
+						    </div>
+						    <div class="collapse show" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
+						      <div class="card-body py-3 px-0">
+						      	<ol>
+						      		<li>Far far away, behind the word mountains</li>
+						      		<li>Consonantia, there live the blind texts</li>
+						      		<li>When she reached the first hills of the Italic Mountains</li>
+						      		<li>Bookmarksgrove, the headline of Alphabet Village</li>
+						      		<li>Separated they live in Bookmarksgrove right</li>
+						      	</ol>
+						      </div>
+						    </div>
+						  </div>
+
+						  <div class="card">
+						    <div class="card-header p-0" id="headingTwo" role="tab">
+						      <h2 class="mb-0">
+						        <button href="#collapseTwo" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTwo">
+						        	<p class="mb-0">How to manage your pets?</p>
+						          <i class="fa" aria-hidden="true"></i>
+						        </button>
+						      </h2>
+						    </div>
+						    <div class="collapse" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo">
+						      <div class="card-body py-3 px-0">
+						      	<ol>
+						      		<li>Far far away, behind the word mountains</li>
+						      		<li>Consonantia, there live the blind texts</li>
+						      		<li>When she reached the first hills of the Italic Mountains</li>
+						      		<li>Bookmarksgrove, the headline of Alphabet Village</li>
+						      		<li>Separated they live in Bookmarksgrove right</li>
+						      	</ol>
+						      </div>
+						    </div>
+						  </div>
+
+						  <div class="card">
+						    <div class="card-header p-0" id="headingThree" role="tab">
+						      <h2 class="mb-0">
+						        <button href="#collapseThree" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="false" aria-controls="collapseThree">
+						        	<p class="mb-0">What is the best grooming for your pets?</p>
+						          <i class="fa" aria-hidden="true"></i>
+						        </button>
+						      </h2>
+						    </div>
+						    <div class="collapse" id="collapseThree" role="tabpanel" aria-labelledby="headingTwo">
+						      <div class="card-body py-3 px-0">
+						      	<ol>
+						      		<li>Far far away, behind the word mountains</li>
+						      		<li>Consonantia, there live the blind texts</li>
+						      		<li>When she reached the first hills of the Italic Mountains</li>
+						      		<li>Bookmarksgrove, the headline of Alphabet Village</li>
+						      		<li>Separated they live in Bookmarksgrove right</li>
+						      	</ol>
+						      </div>
+						    </div>
+						  </div>
+
+						  <div class="card">
+						    <div class="card-header p-0" id="headingFour" role="tab">
+						      <h2 class="mb-0">
+						        <button href="#collapseFour" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="false" aria-controls="collapseFour">
+						        	<p class="mb-0">What are those requirements for sitting pets?</p>
+						          <i class="fa" aria-hidden="true"></i>
+						        </button>
+						      </h2>
+						    </div>
+						    <div class="collapse" id="collapseFour" role="tabpanel" aria-labelledby="headingTwo">
+						      <div class="card-body py-3 px-0">
+						      	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+	        </div>
+        </div>
+    	</div>
+    </section>
+
+    <section class="ftco-section testimony-section" style="background-image: url('{% static 'images/bg_2.jpg' %}');">
+    	<div class="overlay"></div>
+      <div class="container">
+        <div class="row justify-content-center pb-5 mb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2>Happy Clients &amp; Feedbacks</h2>
+          </div>
+        </div>
+        <div class="row ftco-animate">
+          <div class="col-md-12">
+            <div class="carousel-testimony owl-carousel ftco-owl">
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                  <div class="text">
+                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url({% static 'images/person_1.jpg' %})"></div>
+                    	<div class="pl-3">
+		                    <p class="name">Roger Scott</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                  <div class="text">
+                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url({% static 'images/person_2.jpg' %})"></div>
+                    	<div class="pl-3">
+		                    <p class="name">Roger Scott</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                  <div class="text">
+                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url({% static 'images/person_3.jpg' %})"></div>
+                    	<div class="pl-3">
+		                    <p class="name">Roger Scott</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                  <div class="text">
+                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url({% static 'images/person_1.jpg' %})"></div>
+                    	<div class="pl-3">
+		                    <p class="name">Roger Scott</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                  <div class="text">
+                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="d-flex align-items-center">
+                    	<div class="user-img" style="background-image: url({% static 'images/person_2.jpg' %})"></div>
+                    	<div class="pl-3">
+		                    <p class="name">Roger Scott</p>
+		                    <span class="position">Marketing Manager</span>
+		                  </div>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section bg-light">
+    	<div class="container">
+    		<div class="row justify-content-center pb-5 mb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2>Affordable Packages</h2>
+          </div>
+        </div>
+    		<div class="row">
+    			<div class="col-md-4 ftco-animate">
+	          <div class="block-7">
+	          	<div class="img" style="background-image: url({% static 'images/pricing-1.jpg' %});"></div>
+	            <div class="text-center p-4">
+	            	<span class="excerpt d-block">Personal</span>
+	            	<span class="price"><sup>$</sup> <span class="number">49</span> <sub>/mos</sub></span>
+	            
+		            <ul class="pricing-text mb-5">
+		              <li><span class="fa fa-check mr-2"></span>5 Dog Walk</li>
+		              <li><span class="fa fa-check mr-2"></span>3 Vet Visit</li>
+		              <li><span class="fa fa-check mr-2"></span>3 Pet Spa</li>
+		              <li><span class="fa fa-check mr-2"></span>Free Supports</li>
+		            </ul>
+
+	            	<a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-md-4 ftco-animate">
+	          <div class="block-7">
+	          	<div class="img" style="background-image: url({% static 'images/pricing-2.jpg' %});"></div>
+	            <div class="text-center p-4">
+	            	<span class="excerpt d-block">Business</span>
+		            <span class="price"><sup>$</sup> <span class="number">79</span> <sub>/mos</sub></span>
+		            
+		            <ul class="pricing-text mb-5">
+		              <li><span class="fa fa-check mr-2"></span>5 Dog Walk</li>
+		              <li><span class="fa fa-check mr-2"></span>3 Vet Visit</li>
+		              <li><span class="fa fa-check mr-2"></span>3 Pet Spa</li>
+		              <li><span class="fa fa-check mr-2"></span>Free Supports</li>
+		            </ul>
+
+		            <a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-md-4 ftco-animate">
+	          <div class="block-7">
+	          	<div class="img" style="background-image: url({% static 'images/pricing-3.jpg' %});"></div>
+	            <div class="text-center p-4">
+	            	<span class="excerpt d-block">Ultimate</span>
+		            <span class="price"><sup>$</sup> <span class="number">109</span> <sub>/mos</sub></span>
+		            
+		            <ul class="pricing-text mb-5">
+		              <li><span class="fa fa-check mr-2"></span>5 Dog Walk</li>
+		              <li><span class="fa fa-check mr-2"></span>3 Vet Visit</li>
+		              <li><span class="fa fa-check mr-2"></span>3 Pet Spa</li>
+		              <li><span class="fa fa-check mr-2"></span>Free Supports</li>
+		            </ul>
+
+		            <a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+    	</div>
+    </section>
+		
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row justify-content-center pb-5 mb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2>Pets Gallery</h2>
+          </div>
+        </div>
+				<div class="row">
+          <div class="col-md-4 ftco-animate">
+            <div class="work mb-4 img d-flex align-items-end" style="background-image: url({% static 'images/gallery-1.jpg' %});">
+            	<a href="{% static 'images/gallery-1.jpg' %}" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="fa fa-expand"></span>
+	    				</a>
+            	<div class="desc w-100 px-4">
+	              <div class="text w-100 mb-3">
+	              	<span>Cat</span>
+	              	<h2><a href="work-single.html">Persian Cat</a></h2>
+	              </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ftco-animate">
+            <div class="work mb-4 img d-flex align-items-end" style="background-image: url({% static 'images/gallery-2.jpg' %});">
+            	<a href="{% static 'images/gallery-2.jpg' %}" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="fa fa-expand"></span>
+	    				</a>
+            	<div class="desc w-100 px-4">
+	              <div class="text w-100 mb-3">
+	              	<span>Dog</span>
+	              	<h2><a href="work-single.html">Pomeranian</a></h2>
+	              </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ftco-animate">
+            <div class="work mb-4 img d-flex align-items-end" style="background-image: url({% static 'images/gallery-3.jpg' %});">
+            	<a href="{% static 'images/gallery-3.jpg' %}" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="fa fa-expand"></span>
+	    				</a>
+            	<div class="desc w-100 px-4">
+	              <div class="text w-100 mb-3">
+	              	<span>Cat</span>
+	              	<h2><a href="work-single.html">Sphynx Cat</a></h2>
+	              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 ftco-animate">
+            <div class="work mb-4 img d-flex align-items-end" style="background-image: url({% static 'images/gallery-4.jpg' %});">
+            	<a href="{% static 'images/gallery-4.jpg' %}" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="fa fa-expand"></span>
+	    				</a>
+            	<div class="desc w-100 px-4">
+	              <div class="text w-100 mb-3">
+	              	<span>Cat</span>
+	              	<h2><a href="work-single.html">British Shorthair</a></h2>
+	              </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ftco-animate">
+            <div class="work mb-4 img d-flex align-items-end" style="background-image: url({% static 'images/gallery-5.jpg' %});">
+            	<a href="{% static 'images/gallery-5.jpg' %}" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="fa fa-expand"></span>
+	    				</a>
+            	<div class="desc w-100 px-4">
+	              <div class="text w-100 mb-3">
+	              	<span>Dog</span>
+	              	<h2><a href="work-single.html">Beagle</a></h2>
+	              </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ftco-animate">
+            <div class="work mb-4 img d-flex align-items-end" style="background-image: url({% static 'images/gallery-6.jpg' %});">
+            	<a href="{% static 'images/gallery-6.jpg' %}" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="fa fa-expand"></span>
+	    				</a>
+            	<div class="desc w-100 px-4">
+	              <div class="text w-100 mb-3">
+	              	<span>Dog</span>
+	              	<h2><a href="work-single.html">Pug</a></h2>
+	              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+			</div>
+		</section>
+
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center pb-5 mb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2>Latest news from our blog</h2>
+          </div>
+        </div>
+        <div class="row d-flex">
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch">
+              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('{% static 'images/image_1.jpg' %}');">
+              </a>
+              <div class="text p-4">
+              	<div class="meta mb-2">
+                  <div><a href="#">April 07, 2020</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
+                </div>
+                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch">
+              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('{% static 'images/image_2.jpg' %}');">
+              </a>
+              <div class="text p-4">
+              	<div class="meta mb-2">
+                  <div><a href="#">April 07, 2020</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
+                </div>
+                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch">
+              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('{% static 'images/image_3.jpg' %}');">
+              </a>
+              <div class="text p-4">
+              	<div class="meta mb-2">
+                  <div><a href="#">April 07, 2020</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
+                </div>
+                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-appointment ftco-section ftco-no-pt ftco-no-pb img" style="background-image: url({% static 'images/bg_3.jpg' %});">
+			<div class="overlay"></div>
+    	<div class="container">
+    		<div class="row d-md-flex justify-content-end">
+    			<div class="col-md-12 col-lg-6 half p-3 py-5 pl-lg-5 ftco-animate">
+    				<h2 class="mb-4">Free Consultation</h2>
+    				<form action="#" class="appointment">
+    					<div class="row">
+    						<div class="col-md-12">
+									<div class="form-group">
+			    					<div class="form-field">
+	          					<div class="select-wrap">
+	                      <div class="icon"><span class="fa fa-chevron-down"></span></div>
+	                      <select name="" id="" class="form-control">
+	                      	<option value="">Select services</option>
+	                        <option value="">Cat Sitting</option>
+	                        <option value="">Dog Walk</option>
+	                        <option value="">Pet Spa</option>
+	                        <option value="">Pet Grooming</option>
+	                        <option value="">Pet Daycare</option>
+	                      </select>
+	                    </div>
+			              </div>
+			    				</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+			              <input type="text" class="form-control" placeholder="Your Name">
+			            </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+			              <input type="text" class="form-control" placeholder="Vehicle number">
+			            </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+			    					<div class="input-wrap">
+			            		<div class="icon"><span class="fa fa-calendar"></span></div>
+			            		<input type="text" class="form-control appointment_date" placeholder="Date">
+		            		</div>
+			    				</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+			    					<div class="input-wrap">
+			            		<div class="icon"><span class="fa fa-clock-o"></span></div>
+			            		<input type="text" class="form-control appointment_time" placeholder="Time">
+		            		</div>
+			    				</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+			              <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+			            </div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+			              <input type="submit" value="Send message" class="btn btn-primary py-3 px-4">
+			            </div>
+								</div>
+    					</div>
+	          </form>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+	
+    <footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+					<h2 class="footer-heading">Petsitting</h2>
+					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+					<ul class="ftco-footer-social p-0">
+		  <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+		  <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li>
+		  <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+		</ul>
+				</div>
+				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+					<h2 class="footer-heading">Latest News</h2>
+					<div class="block-21 mb-4 d-flex">
+		  <a class="img mr-4 rounded" style="background-image: url({% static 'images/image_1.jpg' %});"></a>
+		  <div class="text">
+			<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+			<div class="meta">
+			  <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
+			  <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+			  <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+			</div>
+		  </div>
+		</div>
+		<div class="block-21 mb-4 d-flex">
+		  <a class="img mr-4 rounded" style="background-image: url({% static 'images/image_2.jpg' %});"></a>
+		  <div class="text">
+			<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+			<div class="meta">
+			  <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
+			  <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+			  <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+			</div>
+		  </div>
+		</div>
+				</div>
+				<div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+					<h2 class="footer-heading">Quick Links</h2>
+					<ul class="list-unstyled">
+		  <li><a href="#" class="py-2 d-block">Home</a></li>
+		  <li><a href="#" class="py-2 d-block">About</a></li>
+		  <li><a href="#" class="py-2 d-block">Services</a></li>
+		  <li><a href="#" class="py-2 d-block">Works</a></li>
+		  <li>
+			<a href="{% url 'login' %}" class="nav-link">Login</a></li>
+		  <li><a href="#" class="py-2 d-block">Contact</a></li>
+		</ul>
+				</div>
+				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+					<h2 class="footer-heading">Have a Questions?</h2>
+					<div class="block-23 mb-3">
+		  <ul>
+			<li><span class="icon fa fa-map"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+			<li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+			<li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">info@yourdomain.com</span></a></li>
+		  </ul>
+		</div>
+				</div>
+			</div>
+			<div class="row mt-5">
+	  
+	</div>
+		</div>
+	</footer>
+
+
+
+	{% else %}
+	
+
+
+	
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+
+    <style>
+		/* Add font-awesome for icons */
+		@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+		
+		/* Reset some default styling */
+		footer {
+		  background-color: #5e615f;
+		  color: #fff;
+		  padding: -10px 0; /* Reduced padding */
+		  font-family: Arial, sans-serif;
+		}
+		
+		.footer-container {
+		  max-width: 1200px;
+		  margin: 0 auto;
+		  display: flex;
+		  justify-content: space-between;
+		  flex-wrap: wrap;
+		}
+		
+		.footer-section {
+		  flex: 1;
+		  margin-right: 20px;
+		  padding: 10px;
+		}
+		
+		/* Style headings in green and make them bold */
+		.footer-section h3 {
+		  font-size: 18px;
+		  margin-bottom: 10px;
+		  text-transform: uppercase;
+		  color: #1db546;
+		  font-weight: bold; /* Added bold style */
+		}
+		
+		/* Style content in white */
+		.footer-section p {
+		  font-size: 14px;
+		  line-height: 1.4;
+		  color: #fff; /* Green color */
+		}
+		
+		.footer-section ul {
+		  list-style-type: none;
+		  padding: 0;
+		}
+		
+		.footer-section ul li {
+		  margin-bottom: 5px;
+		}
+		
+		.footer-section ul li a {
+		  color: #fff;
+		  text-decoration: none;
+		}
+		
+		/* Phone and Social Icons */
+		.fa {
+		  font-size: 18px;
+		  margin-right: 5px;
+		}
+		
+		.social-icons a {
+		  color: #fff;
+		  text-decoration: none;
+		}
+		
+		/* Responsive design for smaller screens */
+		@media (max-width: 768px) {
+		  .footer-container {
+			flex-direction: column;
+			align-items: center;
+		  }
+		  
+		  .footer-section {
+			margin-right: 0;
+			margin-bottom: 20px;
+			text-align: center;
+		  }
+		}
+	  
+		body{
+			margin-top:20px;
+			background:#fcfffd;
+		}
+		.icon-lg {
+			width: 3.5rem;
+			height: 3.5rem;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			font-size: 1.5rem;
+			line-height: 1;
+		}
+		.card {
+			box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+		}
+		a {
+			text-decoration:none;    
+		}
+		
+		.desc{
+			color:#fff;    
+		}
+	  
+	  
+		
+		
+		  
+	  
+		</style>
+				
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container-fluid">
+			<a class="navbar-brand " href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>PETNOOK</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="fa fa-bars"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	        	<a href="{% url 'addproductadmin' %}" class="nav-link"><li class="nav-item">Add product</a></li>
+	        	<a href="{% url 'viewproduct' %}" class="nav-link"><li class="nav-item">View product</a></li>
+	        	
+	          
+			  {% comment %} <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"> {% endcomment %}
+				
+				{% comment %} <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px">  {% endcomment %}
+			  </li>
+        {% if  user.is_authenticated %}
+
+		<div class="profile-icon" style="position: relative; left: -50px; top: 10px;">
+			<li><img src="{% static 'images/profile.png' %}" alt="Profile Picture" style=" margin-bottom: 20px; width:30px;height:30px;margin-top:25px;margin-left:70px"></li>
+			<div class="dropdown-menu" style="margin-top: -25px; margin-bottom: -40px;">
+				<ul>
+					<li><a href="#" style="font-size: 16px; text-align: left; margin-bottom: -20px;"><b>{{user.name}}</b></a></li>
+					<li><a href="#" style="font-size: 14px; text-align: left; margin-bottom: -20px;">Profile</a></li>
+					<li><a href="{% url 'logout' %}" style="font-size: 14px; text-align: left; margin-bottom: -20px;">Log Out</a></li>
+				</ul>
+			</div>
+		</div>
+           {% comment %} {% else %}
+           {% endcomment %}
+    
+                {% endif %}
+          </ul>
+
+
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+
+	<nav class="navbar navbar-expand-lg bg-light " style="10px;padding-left:500px;">
+		<div class="container">
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+		  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				
+			
+			  
+			  
+{% comment %} 			
+			<li><a href="#" class="nav-link ml-4"><b>{{user.name}}</b></a></li>
+			{% if  user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
+			{% else %}
+			<li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
+			<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
+
+            {% endif %} {% endcomment %}
+			</ul>
+		  </div>
+		</div>
+		
+	  </nav>
+	  <section class="section pt-0">
+		<div class="container">
+			<div class="row gy-4 justify-content-center">
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-question-circle"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#"><b>Add Product</b></a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-id-badge"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">View Product</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6"><br>
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-user"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Your Account</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6"><br>
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-trophy"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Copyright and Trademarks</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6"><br>
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-book"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Tax &amp; Compliance</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6"><br>
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-check"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Licensing</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	 
+	  <footer>
+		<div class="footer-container">
+		  <div class="footer-section">
+			<h3>About Us</h3>
+			<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+		  </div>
+		  <div class="footer-section">
+			<h3>Quick Links</h3>
+			<ul>
+			  <li><a href="#">Home</a></li>
+			  <li><a href="#">Shop</a></li>
+			  <li><a href="#">Products</a></li>
+			  <li><a href="#">Contact</a></li>
+			</ul>
+		  </div>
+		  <div class="footer-section">
+			<h3>Contact Us</h3>
+			<address>
+			  <p>123 Street Name</p>
+			  <p>City, Country</p>
+			  <p>Email: example@example.com</p>
+			  <p> <i class="fa fa-phone"></i> +1 (123) 456-7890</p>
+			  <div class="social-icons">
+				<a href="#" class="fa fa-facebook"></a>
+				<a href="#" class="fa fa-twitter"></a>
+				<a href="#" class="fa fa-instagram"></a>
+			  </div>
+			</address>
+		  </div>
+		</div>
+	  </footer>
+	</body>
+	{% endif %}
+	{% endif %}
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+
+    
+  </body>
+</html>

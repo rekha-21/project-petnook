@@ -1,0 +1,314 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pet Sitting - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+
+    <style>
+		/* Add font-awesome for icons */
+		@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+		
+		/* Reset some default styling */
+		footer {
+		  background-color: #5e615f;
+		  color: #fff;
+		  padding: -10px 0; /* Reduced padding */
+		  font-family: Arial, sans-serif;
+		}
+		
+		.footer-container {
+		  max-width: 1200px;
+		  margin: 0 auto;
+		  display: flex;
+		  justify-content: space-between;
+		  flex-wrap: wrap;
+		}
+		
+		.footer-section {
+		  flex: 1;
+		  margin-right: 20px;
+		  padding: 10px;
+		}
+		
+		/* Style headings in green and make them bold */
+		.footer-section h3 {
+		  font-size: 18px;
+		  margin-bottom: 10px;
+		  text-transform: uppercase;
+		  color: #1db546;
+		  font-weight: bold; /* Added bold style */
+		}
+		
+		/* Style content in white */
+		.footer-section p {
+		  font-size: 14px;
+		  line-height: 1.4;
+		  color: #fff; /* Green color */
+		}
+		
+		.footer-section ul {
+		  list-style-type: none;
+		  padding: 0;
+		}
+		
+		.footer-section ul li {
+		  margin-bottom: 5px;
+		}
+		
+		.footer-section ul li a {
+		  color: #fff;
+		  text-decoration: none;
+		}
+		
+		/* Phone and Social Icons */
+		.fa {
+		  font-size: 18px;
+		  margin-right: 5px;
+		}
+		
+		.social-icons a {
+		  color: #fff;
+		  text-decoration: none;
+		}
+		
+		/* Responsive design for smaller screens */
+		@media (max-width: 768px) {
+		  .footer-container {
+			flex-direction: column;
+			align-items: center;
+		  }
+		  
+		  .footer-section {
+			margin-right: 0;
+			margin-bottom: 20px;
+			text-align: center;
+		  }
+		}
+	  
+		body{
+			margin-top:20px;
+			background:#fcfffd;
+		}
+		.icon-lg {
+			width: 3.5rem;
+			height: 3.5rem;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			font-size: 1.5rem;
+			line-height: 1;
+		}
+		.card {
+			box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+		}
+		a {
+			text-decoration:none;    
+		}
+		
+		.desc{
+			color:#fff;    
+		}
+	  
+	  
+		
+		
+		  
+	  
+		</style>
+				
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container-fluid">
+			<a class="navbar-brand " href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>PETNOOK</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="fa fa-bars"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	        	<a href="{% url 'addproductadmin' %}" class="nav-link"><li class="nav-item">Add product</a></li>
+	        	<a href="{% url 'viewproduct' %}" class="nav-link"><li class="nav-item">View product</a></li>
+	        	
+	          
+			  {% comment %} <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"> {% endcomment %}
+				
+				{% comment %} <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px">  {% endcomment %}
+			  </li>
+        {% if  user.is_authenticated %}
+
+		<div class="profile-icon" style="position: relative; left: -50px; top: 10px;">
+			<li><img src="{% static 'images/profile.png' %}" alt="Profile Picture" style=" margin-bottom: 20px; width:30px;height:30px;margin-top:25px;margin-left:70px"></li>
+			<div class="dropdown-menu" style="margin-top: -25px; margin-bottom: -40px;">
+				<ul>
+					<li><a href="#" style="font-size: 16px; text-align: left; margin-bottom: -20px;"><b>{{user.name}}</b></a></li>
+					<li><a href="#" style="font-size: 14px; text-align: left; margin-bottom: -20px;">Profile</a></li>
+					<li><a href="{% url 'logout' %}" style="font-size: 14px; text-align: left; margin-bottom: -20px;">Log Out</a></li>
+				</ul>
+			</div>
+		</div>
+           {% comment %} {% else %}
+           {% endcomment %}
+    
+                {% endif %}
+          </ul>
+
+
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+
+	<nav class="navbar navbar-expand-lg bg-light " style="10px;padding-left:500px;">
+		<div class="container">
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+		  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				
+			
+			  
+			  
+{% comment %} 			
+			<li><a href="#" class="nav-link ml-4"><b>{{user.name}}</b></a></li>
+			{% if  user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
+			{% else %}
+			<li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
+			<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
+
+            {% endif %} {% endcomment %}
+			</ul>
+		  </div>
+		</div>
+		
+	  </nav>
+	  <section class="section pt-0">
+		<div class="container">
+			<div class="row gy-4 justify-content-center">
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-question-circle"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#"><b>Add Product</b></a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-id-badge"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">View Product</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6"><br>
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-user"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Your Account</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6"><br>
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-trophy"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Copyright and Trademarks</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6"><br>
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-book"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Tax &amp; Compliance</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6"><br>
+					<div class="card">
+						<div class="card-body d-flex">
+							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-check"></i></div>
+							<div class="ps-3 col">
+								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Licensing</a></h5>
+								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	 
+	  <footer>
+		<div class="footer-container">
+		  <div class="footer-section">
+			<h3>About Us</h3>
+			<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+		  </div>
+		  <div class="footer-section">
+			<h3>Quick Links</h3>
+			<ul>
+			  <li><a href="#">Home</a></li>
+			  <li><a href="#">Shop</a></li>
+			  <li><a href="#">Products</a></li>
+			  <li><a href="#">Contact</a></li>
+			</ul>
+		  </div>
+		  <div class="footer-section">
+			<h3>Contact Us</h3>
+			<address>
+			  <p>123 Street Name</p>
+			  <p>City, Country</p>
+			  <p>Email: example@example.com</p>
+			  <p> <i class="fa fa-phone"></i> +1 (123) 456-7890</p>
+			  <div class="social-icons">
+				<a href="#" class="fa fa-facebook"></a>
+				<a href="#" class="fa fa-twitter"></a>
+				<a href="#" class="fa fa-instagram"></a>
+			  </div>
+			</address>
+		  </div>
+		</div>
+	  </footer>
+	</body>
