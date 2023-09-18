@@ -182,7 +182,7 @@
         <div class="card shadow col-12 col-lg-3 p-4 bg-light.bg-gradient m-2">
           <div class="">
             <div class="row">
-              {% if i.product_images1 %}
+              {% if i.category_name %}
               <div class="card col-12">
                 <img
                   src="{{ i.product_images1.url }}"
@@ -191,15 +191,16 @@
                   style="width: 100%; height: 220px; object-fit: cover;"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">{{ i.product_name}}</h5>
-				  {{ i.category}}<br>
-				  {{ i.price}}<br>
-				  <a class="btn btn-primary" href="{% url 'updateproduct' i.id %}"                  >
+                  <h5 class="card-title">{{ i.category_name}}</h5>
+				  {{ i.pet}}<br>
+				  {{ i.subcategory1}}<br>
+                  <a class="btn btn-primary" href=""
+                  >
                     
                     Update</a
                     
                   >
-                  <a class="btn btn-danger" href="{% url 'deleteproduct' i.id %}">
+                  <a class="btn btn-danger" href="">
                     Delete</a>
                   
                 </div>

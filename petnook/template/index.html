@@ -66,7 +66,11 @@
 	  .profile-icon:hover .dropdown-menu {
 		display: block;
 	  }
-	  
+	
+    .item img:hover {
+        transform: scale(1.1); /* Scale the image by 10% on hover */
+    }
+
   </style>
     
 
@@ -119,26 +123,11 @@
 				<img src="{% static 'images/cart.png' %}" alt="" style="height: 20px;position: relative; left: -80px;">
 			</a></li>
 			
-			{% if  user.is_authenticated %}
-			<div class="profile-icon" style="position: relative; left: -50px; top: 10px;">
-				<li><img src="{% static 'images/profile.png' %}" alt="Profile Picture" style=" margin-bottom: 20px;"></li>
-				<div class="dropdown-menu" style="margin-top: -25px; margin-bottom: -40px;">
-					<ul>
-						<li><a href="#" style="font-size: 16px; text-align: left; margin-bottom: -20px;"><b>{{user.name}}</b></a></li>
-						<li><a href="{% url 'profile' %}" style="font-size: 14px; text-align: left; margin-bottom: -20px;">Profile</a></li>
-						<li><a href="{% url 'logout' %}" style="font-size: 14px; text-align: left; margin-bottom: -20px;">Log Out</a></li>
-					</ul>
-				</div>
-			</div>
+			{% if  user.anonymous %}
 			
 			
 			{% comment %} <li><a href="#" class="nav-link ml-4"><b>{{user.name}}</b></a></li> {% endcomment %}
 			
-			<button type="button" class="btn btn-success mr-5" style="border-radius: 50%; position: relative; left: -50px;"" >
-				<a href="{% url 'seller' %}" class="nav-link text-light" >
-					Start Selling
-				</a>
-			</button>
 			{% else %}
 			<li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"></li>
 			<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
@@ -258,200 +247,30 @@
 
     
 
-    <section class="ftco-section bg-light ftco-faqs">
-    	<div class="container">
-    		<div class="row">
-    			<div class="col-lg-6 order-md-last">
-    				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="background-image:url({% static 'images/about.jpg' %});">
-    					<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-    						<span class="fa fa-play"></span>
-    					</a>
-    				</div>
-    				<div class="d-flex mt-3">
-    					<div class="img img-2 mr-md-2" style="background-image:url({% static 'images/about-2.jpg' %});"></div>
-    					<div class="img img-2 ml-md-2" style="background-image:url({% static 'images/about-3.jpg' %});"></div>
-    				</div>
-    			</div>
-
-    			<div class="col-lg-6">
-    				<div class="heading-section mb-5 mt-5 mt-lg-0">
-	            <h2 class="mb-3">Frequently Asks Questions</h2>
-	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-    				</div>
-    				<div id="accordion" class="myaccordion w-100" aria-multiselectable="true">
-						  <div class="card">
-						    <div class="card-header p-0" id="headingOne">
-						      <h2 class="mb-0">
-						        <button href="#collapseOne" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
-						        	<p class="mb-0">How to train your pet dog?</p>
-						          <i class="fa" aria-hidden="true"></i>
-						        </button>
-						      </h2>
-						    </div>
-						    <div class="collapse show" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
-						      <div class="card-body py-3 px-0">
-						      	<ol>
-						      		<li>Far far away, behind the word mountains</li>
-						      		<li>Consonantia, there live the blind texts</li>
-						      		<li>When she reached the first hills of the Italic Mountains</li>
-						      		<li>Bookmarksgrove, the headline of Alphabet Village</li>
-						      		<li>Separated they live in Bookmarksgrove right</li>
-						      	</ol>
-						      </div>
-						    </div>
-						  </div>
-
-						  <div class="card">
-						    <div class="card-header p-0" id="headingTwo" role="tab">
-						      <h2 class="mb-0">
-						        <button href="#collapseTwo" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTwo">
-						        	<p class="mb-0">How to manage your pets?</p>
-						          <i class="fa" aria-hidden="true"></i>
-						        </button>
-						      </h2>
-						    </div>
-						    <div class="collapse" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo">
-						      <div class="card-body py-3 px-0">
-						      	<ol>
-						      		<li>Far far away, behind the word mountains</li>
-						      		<li>Consonantia, there live the blind texts</li>
-						      		<li>When she reached the first hills of the Italic Mountains</li>
-						      		<li>Bookmarksgrove, the headline of Alphabet Village</li>
-						      		<li>Separated they live in Bookmarksgrove right</li>
-						      	</ol>
-						      </div>
-						    </div>
-						  </div>
-
-						  <div class="card">
-						    <div class="card-header p-0" id="headingThree" role="tab">
-						      <h2 class="mb-0">
-						        <button href="#collapseThree" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="false" aria-controls="collapseThree">
-						        	<p class="mb-0">What is the best grooming for your pets?</p>
-						          <i class="fa" aria-hidden="true"></i>
-						        </button>
-						      </h2>
-						    </div>
-						    <div class="collapse" id="collapseThree" role="tabpanel" aria-labelledby="headingTwo">
-						      <div class="card-body py-3 px-0">
-						      	<ol>
-						      		<li>Far far away, behind the word mountains</li>
-						      		<li>Consonantia, there live the blind texts</li>
-						      		<li>When she reached the first hills of the Italic Mountains</li>
-						      		<li>Bookmarksgrove, the headline of Alphabet Village</li>
-						      		<li>Separated they live in Bookmarksgrove right</li>
-						      	</ol>
-						      </div>
-						    </div>
-						  </div>
-
-						  <div class="card">
-						    <div class="card-header p-0" id="headingFour" role="tab">
-						      <h2 class="mb-0">
-						        <button href="#collapseFour" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="false" aria-controls="collapseFour">
-						        	<p class="mb-0">What are those requirements for sitting pets?</p>
-						          <i class="fa" aria-hidden="true"></i>
-						        </button>
-						      </h2>
-						    </div>
-						    <div class="collapse" id="collapseFour" role="tabpanel" aria-labelledby="headingTwo">
-						      <div class="card-body py-3 px-0">
-						      	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-	        </div>
-        </div>
-    	</div>
-    </section>
-
+    
     <section class="ftco-section testimony-section" style="background-image: url('{% static 'images/bg_2.jpg' %}');">
     	<div class="overlay"></div>
       <div class="container">
         <div class="row justify-content-center pb-5 mb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
-            <h2>Happy Clients &amp; Feedbacks</h2>
+            <h1><b>Shop By Pets</b></h1>
           </div>
         </div>
         <div class="row ftco-animate">
           <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel ftco-owl">
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static 'images/person_1.jpg' %})"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static 'images/person_2.jpg' %})"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static 'images/person_3.jpg' %})"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static 'images/person_1.jpg' %})"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                	<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url({% static 'images/person_2.jpg' %})"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
+            <div class="carousel-testimony owl-carousel ftco-owl" style="background-color: white;">
+				<div class="item" >
+					<img src="{% static 'images/bird.jpg' %}" alt="Image Alt Text" class="img-fluid"></a>
+				</div>
+				<div class="item" >
+    			<img src="{% static 'images/cat.jpg' %}" alt="Image Alt Text" class="img-fluid"></a>
+</div>
+<div class="item" ><a href="{% url 'displayDog' %}">
+	<img src="{% static 'images/dog.jpg' %}" alt="Image Alt Text" class="img-fluid"></a>
+</div>
+</div>
+              
+             
             </div>
           </div>
         </div>

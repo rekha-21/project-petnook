@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import CustomUser
+from indexapp.models import UserProfile
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
@@ -8,7 +9,6 @@ def landing(request):
 # Create your views here.
 def customer_register(request):
     #return render (request,'registration.html')
-    
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -29,6 +29,10 @@ def customer_register(request):
             if roles == 'customer': 
                 user.is_customer = True 
             user.save() 
+
+            user_profile=UserProfile(user=user) 
+            user_profile.save()
+
             messages.success(request, "Registered as a customer successfully") 
             return redirect('login')  # Redirect to homepage or thank-you page 
          
@@ -40,6 +44,7 @@ def customer_register(request):
 
 
 def seller_register(request): 
+
     if request.method == 'POST':
         name = request.POST.get('name') 
         email = request.POST.get('email') 
@@ -56,7 +61,8 @@ def seller_register(request):
             user = CustomUser(name=name, email=email) 
             user.set_password(password) 
             user.is_seller = True 
-            user.save() 
+            user.save()
+           
             messages.success(request, "Registered as a seller successfully") 
             return redirect('login')  # Redirect to homepage or thank-you page 
          

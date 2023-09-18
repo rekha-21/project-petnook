@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Product, UserProfile
+from .models import Product, UserProfile,Category
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
@@ -50,34 +50,121 @@ def viewproduct(request):
     return render(request, "viewproduct.html", {'stdata': stdata})
 
 def profile(request):
-    # user = request.user
-    # user_profile = UserProfile.objects.get(user=user)
-    # if request.method == 'POST':
-    #     # Update user fields
-    #     user.first_name = request.POST.get('first_name')
-    #     user.last_name = request.POST.get('last_name')
-    #     user.save()
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    if request.method == 'POST':
+        # Update user fields
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.save()
 
-    #     # Update user profile fields
-    #     user_profile.state = request.POST.get('state')
-    #     user_profile.city = request.POST.get('city')
-    #     user_profile.district = request.POST.get('district')
+        # Update user profile fields
+        user_profile.state = request.POST.get('state')
+        user_profile.city = request.POST.get('city')
+        user_profile.district = request.POST.get('district')
         
-    #     # user_profile.gender = request.POST.get('gender')
-    #     user_profile.phone_no = request.POST.get('phone_no')
-    #     user_profile.addressline1 = request.POST.get('addressline1')
-    #     user_profile.addressline2 = request.POST.get('addressline2')
-    #     user_profile.pin_code = request.POST.get('pin_code')
+        # user_profile.gender = request.POST.get('gender')
+        user_profile.phone_number = request.POST.get('phone_number')
+        user_profile.addressline1 = request.POST.get('addressline1')
+        user_profile.addressline2 = request.POST.get('addressline2')
+        user_profile.pin_code = request.POST.get('pin_code')
         
-    #     user_profile.save()
+        user_profile.save()
 
-    #     return redirect('profile') 
-    # context = {
-    #     'user': user,
-    #     'user_profile': user_profile
-    # }, context
-    return render(request, 'profile.html')
+        return redirect('profile') 
+    context = {
+        'user': user,
+        'user_profile': user_profile
+    }
+    return render(request, 'profile.html', context)
 
 def customerproduct(request):
     stdata = Product.objects.filter(status=False)
     return render(request, "customerproduct.html", {'stdata': stdata})
+
+
+def displayDog(request):
+    return render(request,'displayDog.html')
+
+# def displayCat(request):
+#     return render(request,'displayCat.html')
+
+# def displayBird(request):
+#     return render(request,'displayBird.html')
+
+
+def product_list(request):
+    # Filter products where the 'category' field is "bed"
+    products = Product.objects.filter(category='food')
+    
+    return render(request, "product_list.html", {'products': products})
+
+
+
+def addcategory(request):
+
+    error_message = ''
+    add_category = Category.objects.all()
+
+    if request.method == 'POST':
+        # Create a new Category instance and assign values
+        add_category = Category()
+        add_category.pet = request.POST.get('pet')
+        add_category.category_name = request.POST.get('category_name')
+        add_category.subcategory1 = request.POST.get('subcategory1')
+        add_category.subcategory2 = request.POST.get('subcategory2')
+        add_category.subcategory3 = request.POST.get('subcategory3')
+        add_category.subcategory4 = request.POST.get('subcategory4')
+       
+        add_category.save()
+        
+        return redirect("admindashboard")
+    
+    context = {
+        'add_category': add_category
+        
+        
+    }
+    return render(request, "addcategory.html", context)
+
+
+# def delete_category(request, bookid2):
+#     remove=category.objects.filter(product_id=bookid2)
+#     remove.delete()
+
+def viewcategory(request):
+    stdata = Category.objects.all()
+    return render(request, "viewcategory.html", {'stdata': stdata})
+
+def updateproduct(request, stid2):
+    stid=Product.objects.get(id=stid2)
+    stdata = Category.objects.all()
+    stid1=Product.objects.filter(id=stid2)
+    if request.method == 'POST':
+        
+        stid.product_name = request.POST.get('product_name')
+        stid.brand_name = request.POST.get('brand_name')
+        stid.product_description = request.POST.get('product_description')
+        stid.material_description = request.POST.get('material_description')
+        stid.price = request.POST.get('price')
+        stid.quantity = request.POST.get('quantity')
+        stid.category = request.POST.get('category')
+        stid.subcategory = request.POST.get('subcategory')
+
+        stid.save()
+        return redirect("product")
+
+    return render(request, 'updateproduct.html', {'stid1': stid1,'stdata':stdata})
+
+def deleteproduct(request, stid2):
+    dele=Product.objects.get(id=stid2)
+    dele.status=True
+    dele.save()
+    return redirect('viewproduct')
+
+
+def productdescription(request,stid2):
+    stid=Product.objects.get(id=stid2)
+    stdata = Category.objects.all()
+    stid1=Product.objects.filter(id=stid2)
+    return render(request,'productdescription.html',{'stid1': stid1,'stdata':stdata})

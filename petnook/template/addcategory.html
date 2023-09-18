@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Bootstrap Form</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Choose a Pet Form</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="petSelect">Choose a Pet:</label>
+                <select class="form-control" id="petSelect" name="pet">
+                    <option value="Dog">Dog</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Bird">Bird</option>
+                </select> 
+            </div>
+            <div class="form-group">
+                <label for="categoryName">Category Name:</label>
+                <input type="text" class="form-control" id="categoryName" name="category_name" >
+            </div>
+            <div class="form-group">
+                <label for="subcategory1">Subcategory 1:</label>
+                <input type="text" class="form-control" id="subcategory1" name="subcategory1">
+            </div>
+            <div class="form-group">
+                <label for="subcategory2">Subcategory 2:</label>
+                <input type="text" class="form-control" id="subcategory2" name="subcategory2">
+            </div>
+            <div class="form-group">
+                <label for="subcategory3">Subcategory 3:</label>
+                <input type="text" class="form-control" id="subcategory3" name="subcategory3">
+            </div>
+            <div class="form-group">
+                <label for="subcategory4">Subcategory 4:</label>
+                <input type="text" class="form-control" id="subcategory4" name="subcategory4">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

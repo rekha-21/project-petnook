@@ -115,39 +115,7 @@
 	  
 		</style>
 				
-		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container-fluid">
-			<a class="navbar-brand " href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>PETNOOK</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="fa fa-bars"></span> Menu
-	      </button>
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	        	<a href="{% url 'addproductadmin' %}" class="nav-link"><li class="nav-item">Add product</a></li>
-	        	
-	        	<li class="nav-item"><a href="" class="nav-link">View product</a></li>
-	          
-	          
-			  {% comment %} <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"> {% endcomment %}
-				
-				{% comment %} <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px">  {% endcomment %}
-			  </li>
-        {% if  user.is_authenticated %}
 
-          <li><a href="#" class="nav-link ml-4 text-success"><b>{{user.name}}</b></a></li>
-                <li><a href="{% url 'logout' %}" class="nav-item nav-link text-success">Log Out</a></li>
-          {% comment %} {% else %}
-          <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
-          <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
-     {% endcomment %}
-                {% endif %}
-          </ul>
-
-
-	      </div>
-	    </div>
-	  </nav>
     <!-- END nav -->
 
 
@@ -192,18 +160,11 @@
                   style="width: 100%; height: 220px; object-fit: cover;"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">{{ i.product_name}}</h5>
+					<a href="{% url 'productdescription' i.id %}">
+                  <h5 class="card-title" >{{ i.product_name}}</h5></a>
                   {{ i.price}}<br>
                   {{ i.brand_name}}<br>
-                  <a class="btn btn-primary" href=""
-                  >
-                    
-                    Add to cart</a
-                    
-                  >
-                  <a class="btn btn-danger" href="">
-                    Buy Now</a>
-                  
+                 
                 </div>
               </div>
               {% else %}

@@ -953,9 +953,8 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	        	<a href="{% url 'addproductadmin' %}" class="nav-link"><li class="nav-item">Add product</a></li>
-	        	<a href="{% url 'viewproduct' %}" class="nav-link"><li class="nav-item">View product</a></li>
 	        	
+				
 	          
 			  {% comment %} <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"> {% endcomment %}
 				
@@ -1020,8 +1019,13 @@
 						<div class="card-body d-flex">
 							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-question-circle"></i></div>
 							<div class="ps-3 col">
-								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#"><b>Add Product</b></a></h5>
-								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+								<h5 class="h6 mb-2">
+									<a class="stretched-link text-reset" href="{% url 'addproductadmin' %}" style="font-size: 25px; font-weight: bold;">
+										<b>Add Product</b>
+									</a>
+								</h5>
+								
+								
 							</div>
 							
 						</div>
@@ -1032,8 +1036,11 @@
 						<div class="card-body d-flex">
 							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-id-badge"></i></div>
 							<div class="ps-3 col">
-								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">View Product</a></h5>
-								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+								<h5 class="h6 mb-2">
+									<a class="stretched-link text-reset" href="{% url 'viewproduct' %}" style="font-size: 25px; font-weight: bold;">
+										<b>View Product</b>
+									</a>
+								</h5>
 							</div>
 						</div>
 					</div>
@@ -1065,8 +1072,11 @@
 						<div class="card-body d-flex">
 							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-book"></i></div>
 							<div class="ps-3 col">
-								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Tax &amp; Compliance</a></h5>
-								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+								<h5 class="h6 mb-2">
+									<a class="stretched-link text-reset" href="{% url 'viewcategory' %}" style="font-size: 25px; font-weight: bold;margin-top: 50px;">
+										<b>View Category</b>
+									</a>
+								</h5>
 							</div>
 						</div>
 					</div>
@@ -1076,8 +1086,12 @@
 						<div class="card-body d-flex">
 							<div class="icon-lg bg-primary rounded-3 text-white"><i class="fa fa-check"></i></div>
 							<div class="ps-3 col">
-								<h5 class="h6 mb-2"><a class="stretched-link text-reset" href="#">Licensing</a></h5>
-								<p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+								<h5 class="h6 mb-2">
+									<a class="stretched-link text-reset" href="{% url 'addcategory' %}" style="font-size: 25px; font-weight: bold;margin-top: 50px;">
+										<b>Add Category</b>
+									</a>
+								</h5>
+								
 							</div>
 						</div>
 					</div>

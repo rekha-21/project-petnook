@@ -9,6 +9,7 @@ class Product(models.Model):
     product_images2 = models.FileField(upload_to='sample/', null=True, blank=True, max_length=255)
     product_images3 = models.FileField(upload_to='sample/', null=True, blank=True, max_length=255)
     category = models.CharField(max_length=255, null=True)
+    subcategory = models.CharField(max_length=255, null=True)
     brand_name = models.CharField(max_length=255, null=True)
     sizeQuantity = models.CharField(max_length=255, null=True)
     petCompatibility = models.CharField(max_length=255, null=True)
@@ -34,3 +35,18 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+
+class Category(models.Model):
+
+
+    pet = models.CharField(max_length=10)
+    category_name = models.CharField(max_length=255, unique=True)
+    subcategory1 = models.CharField(max_length=255)
+    subcategory2 = models.CharField(max_length=255)
+    subcategory3 = models.CharField(max_length=255)
+    subcategory4 = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.category_name
