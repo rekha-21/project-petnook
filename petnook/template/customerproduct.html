@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
@@ -164,7 +164,9 @@
                   <h5 class="card-title" >{{ i.product_name}}</h5></a>
                   {{ i.price}}<br>
                   {{ i.brand_name}}<br>
-                 
+                  <a href="#" onclick="addToWishlist('{{i.id }}')" class="btn btn-outline-danger"><i class="fas fa-heart"></i></a>
+                  <a href="#" onclick="addToCart('{{i.id }}')" class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i></a>
+
                 </div>
               </div>
               {% else %}
@@ -182,5 +184,52 @@
         </div>
         {% endfor %}
 	</form>
-	 
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script>
+		
+		function addToWishlist(productId) {
+			event.preventDefault();  // Prevent the default form submission behavior
+		
+			// Get the CSRF token from the cookies
+			const csrfToken = getCookie('csrftoken');
+		
+			$.ajax({
+				url: `/add_to_wishlist/${productId}/`,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					csrfmiddlewaretoken: csrfToken,  // Include the CSRF token in the data
+				},
+				success: function (data) {
+					if (data.success) {
+						alert('Product added to wishlist successfully.');
+					} else {
+						alert('Failed to add product to wishlist.');
+					}
+				},
+				error: function () {
+					alert('An error occurred while adding the product to wishlist.');
+				}
+			});
+		}
+		
+	
+		// Function to get the CSRF token from cookies
+		function getCookie(name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				const cookies = document.cookie.split(';');
+				for (let i = 0; i < cookies.length; i++) {
+					const cookie = cookies[i].trim();
+					if (cookie.substring(0, name.length + 1) === (name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		}
+	</script>
 	</body>

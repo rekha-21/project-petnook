@@ -123,7 +123,7 @@
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	        	<li class="nav-item active"><a href="{% url 'landing' %}" class="nav-link">Home</a></li>
 	        	<a href="{% url 'addproductadmin' %}" class="nav-link"><li class="nav-item">Add product</a></li>
 	        	
 	        	<li class="nav-item"><a href="" class="nav-link">View product</a></li>
@@ -219,6 +219,36 @@
         </div>
         {% endfor %}
 	</form>
-	 
+	<footer>
+		<div class="footer-container">
+		  <div class="footer-section">
+			<h3>About Us</h3>
+			<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+		  </div>
+		  <div class="footer-section">
+			<h3>Quick Links</h3>
+			<ul>
+			  <li><a href="#">Home</a></li>
+			  <li><a href="#">Shop</a></li>
+			  <li><a href="#">Products</a></li>
+			  <li><a href="#">Contact</a></li>
+			</ul>
+		  </div>
+		  <div class="footer-section">
+			<h3>Contact Us</h3>
+			<address>
+			  <p>123 Street Name</p>
+			  <p>City, Country</p>
+			  <p>Email: example@example.com</p>
+			  <p> <i class="fa fa-phone"></i> +1 (123) 456-7890</p>
+			  <div class="social-icons">
+				<a href="#" class="fa fa-facebook"></a>
+				<a href="#" class="fa fa-twitter"></a>
+				<a href="#" class="fa fa-instagram"></a>
+			  </div>
+			</address>
+		  </div>
+		</div>
+	  </footer>
 	</body>
 	</html>

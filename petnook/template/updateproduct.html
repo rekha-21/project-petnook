@@ -1,4 +1,184 @@
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pet Sitting - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+
+    <style>
+		/* Add font-awesome for icons */
+		@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+		
+		/* Reset some default styling */
+		footer {
+		  background-color: #5e615f;
+		  color: #fff;
+		  padding: -10px 0; /* Reduced padding */
+		  font-family: Arial, sans-serif;
+		}
+		
+		.footer-container {
+		  max-width: 1200px;
+		  margin: 0 auto;
+		  display: flex;
+		  justify-content: space-between;
+		  flex-wrap: wrap;
+		}
+		
+		.footer-section {
+		  flex: 1;
+		  margin-right: 20px;
+		  padding: 10px;
+		}
+		
+		/* Style headings in green and make them bold */
+		.footer-section h3 {
+		  font-size: 18px;
+		  margin-bottom: 10px;
+		  text-transform: uppercase;
+		  color: #1db546;
+		  font-weight: bold; /* Added bold style */
+		}
+		
+		/* Style content in white */
+		.footer-section p {
+		  font-size: 14px;
+		  line-height: 1.4;
+		  color: #fff; /* Green color */
+		}
+		
+		.footer-section ul {
+		  list-style-type: none;
+		  padding: 0;
+		}
+		
+		.footer-section ul li {
+		  margin-bottom: 5px;
+		}
+		
+		.footer-section ul li a {
+		  color: #fff;
+		  text-decoration: none;
+		}
+		
+		/* Phone and Social Icons */
+		.fa {
+		  font-size: 18px;
+		  margin-right: 5px;
+		}
+		
+		.social-icons a {
+		  color: #fff;
+		  text-decoration: none;
+		}
+		
+		/* Responsive design for smaller screens */
+		@media (max-width: 768px) {
+		  .footer-container {
+			flex-direction: column;
+			align-items: center;
+		  }
+		  
+		  .footer-section {
+			margin-right: 0;
+			margin-bottom: 20px;
+			text-align: center;
+		  }
+		}
+	  
+	  
+	  
+	  
+		
+		
+		  
+	  
+		</style>
+				
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container-fluid">
+			<a class="navbar-brand " href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>PETNOOK</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="fa fa-bars"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	        	<a href="{% url 'addproductadmin' %}" class="nav-link"><li class="nav-item">Add product</a></li>
+	        	
+	        	<li class="nav-item"><a href="{% url 'viewproduct' %}" class="nav-link">View product</a></li>
+	          
+	          
+			  {% comment %} <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"> {% endcomment %}
+				
+				{% comment %} <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px">  {% endcomment %}
+			  </li>
+        {% if  user.is_authenticated %}
+
+          <li><a href="#" class="nav-link ml-4 text-success"><b>{{user.name}}</b></a></li>
+                <li><a href="{% url 'logout' %}" class="nav-item nav-link text-success">Log Out</a></li>
+          {% comment %} {% else %}
+          <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
+          <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
+     {% endcomment %}
+                {% endif %}
+          </ul>
+
+
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+
+	<nav class="navbar navbar-expand-lg bg-light " style="10px;padding-left:500px;">
+		<div class="container">
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+		  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				
+			
+			  
+			  
+{% comment %} 			
+			<li><a href="#" class="nav-link ml-4"><b>{{user.name}}</b></a></li>
+			{% if  user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
+			{% else %}
+			<li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
+			<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
+
+            {% endif %} {% endcomment %}
+			</ul>
+
+		  </div>
+		</div>
+		
+	  </nav>
+{% comment %} {% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +191,7 @@
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
   />
+  
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
@@ -128,28 +309,75 @@
                     
                 </div>
                 <div class="col-lg-4 d-none d-lg-block ">
-                    <div class="main-menu-area text-center ">
-                        <nav class="main-navigation ">
-                            <ul><li><a href="{% url 'admindashboard' %}" class="nav-link"><B>Dashboard</B> </a></li>
-                                
-                                        {% if  user.is_authenticated %}
-                                        {% if user.role == 2 %}
-                                
-                                        <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
-                                        {% else %}
-                                                <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
-                                {% endif %}
-                                {% endif %}
-                            </ul>
-                        </nav>
-                    </div>
+                    	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container-fluid">
+			<a class="navbar-brand " href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>PETNOOK</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="fa fa-bars"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	        	<a href="{% url 'addproductadmin' %}" class="nav-link"><li class="nav-item">Add product</a></li>
+	        	
+	        	<li class="nav-item"><a href="" class="nav-link">View product</a></li>
+	          
+	          
+			  {% comment %} <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"> {% endcomment %}
+				
+				{% comment %} <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px">  {% endcomment %}
+			  </li>
+        {% if  user.is_authenticated %}
+
+          {% comment %} <li><a href="#" class="nav-link ml-4 text-success"><b>{{user.name}}</b></a></li>
+                <li><a href="{% url 'logout' %}" class="nav-item nav-link text-success">Log Out</a></li> {% endcomment %}
+          {% comment %} {% else %}
+          <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
+          <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
+     {% endcomment %}
+                {% endif %}
+          </ul>
+
+
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+
+	<nav class="navbar navbar-expand-lg bg-light " style="10px;padding-left:500px;">
+		<div class="container">
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+		  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				
+			
+			  
+			  
+{% comment %} 			
+			<li><a href="#" class="nav-link ml-4"><b>{{user.name}}</b></a></li>
+			{% if  user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
+			{% else %}
+			<li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
+			<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
+
+            {% endif %} {% endcomment %}
+			</ul>
+		  </div>
+		</div>
+		
+	  </nav>
                 </div>
                 
             </div>
         </div>
     </div>
 </div>
-<!-- header-area end -->
+<!-- header-area end --> 
    
   
     
@@ -250,7 +478,7 @@
                   </div>
                 </div>
                 {% endfor %}
-            <button type="submit" class="btn btn-light btn-l" style="margin-left: 35%;">Add Product</button>
+            <button type="submit" class="btn btn-light btn-l" style="margin-left: 35%;">Update Product</button>
         </form>
       </div></div></div></div></div></div></div>
 <!--       

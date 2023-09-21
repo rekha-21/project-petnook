@@ -1,237 +1,137 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Product Listing</title>
+    <title>Add Product</title>
+
     <style>
+        /* Basic styling for the form container */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        .form-container {
             background-color: #fff;
+            padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
         }
 
-        h2 {
-            text-align: center;
-        }
-
-        form {
-            display: grid;
-            grid-gap: 10px;
-        }
-
+        /* Add additional styling for labels, inputs, and buttons here */
         label {
-            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
         }
 
         input[type="text"],
         input[type="number"],
-        textarea {
+        select,
+        textarea,
+        input[type="file"] {
             width: 100%;
             padding: 10px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
+            border-radius: 3px;
         }
 
         select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
+            appearance: none; /* Remove default styles on select */
         }
 
-        button {
-            background-color: #2b8c37;
+        button[type="submit"] {
+            background-color: #007bff;
             color: #fff;
             padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 3px;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        button:hover {
-            background-color: #1d1f1d;
+        /* Validation styles */
+        .error {
+            color: #ff0000;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
+    <h2>Add Product</h2>
+    <form action="{% url 'add_product' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
 
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Product Listing</title>
-    <style>
-        /* Your existing CSS styles here */
-    </style>
-</head>
-<body>
-    
-    <div class="container">
-        <h2>Add a Pet Product</h2>
-        <form method="POST"  enctype="multipart/form-data">
-            {% csrf_token %}
-            <label for="productName">Product Name:</label>
-            <input type="text" id="product_name" name="product_name" required>
+        <!-- Choose a Pet -->
+        <label for="petType">Choose a Pet:</label>
+        <select id="petType" name="petType">
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="bird">Bird</option>
+        </select>
 
-            <label for="productDescription">Product Description:</label>
-            <textarea id="product_description" name="product_description" rows="4" required></textarea>
+        <!-- Select Product Category -->
+        <label for="productCategory">Select Product Category:</label>
+        <select id="productCategory" name="productCategory">
+            <!-- Populate this dynamically based on the selected pet type using JavaScript -->
+        </select>
 
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price" min="0" step="0.01" required>
+        <!-- Select Product Subcategory -->
+        <label for="productSubcategory">Select Product Subcategory:</label>
+        <select id="productSubcategory" name="productSubcategory">
+            <!-- Populate this dynamically based on the selected product category using JavaScript -->
+        </select>
 
-            <label for="productImage">Product Image:</label>
-            <input type="file" id="product_images1" name="product_images1" required>
-            <label for="productImage">Product Image:</label>
-            <input type="file" id="product_images2" name="product_images2" required>
-            <label for="productImage">Product Image:</label>
-            <input type="file" id="product_images3" name="product_images3" required>
+        <!-- Product Name -->
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName" required>
 
+        <!-- Product Description -->
+        <label for="productDescription">Product Description:</label>
+        <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
 
-            <label for="productCategory">Product Category:</label>
-            <select id="category" name="category" required>
-                <option value="food">Food </option>
-                <option value="clothes"> Grooming</option>
-                <option value="collar">Collars</option>
-                <option value="accessories">Accessories</option>
-                <option value="toys">Pet Toys</option>
-                <option value="bowls">Pet Bowls</option>
-                <option value="cages">Cages</option>
-                <!-- Add more options as needed -->
+        <!-- Brand Name -->
+        <label for="brandName">Brand Name:</label>
+        <input type="text" id="brandName" name="brandName">
+
+        <!-- Price -->
+        <label for="price">Price:</label>
+        <div>
+            <input type="number" id="priceValue" name="priceValue" step="" required inputmode="numeric">
+            <select id="priceUnit" name="priceUnit">
+                <option value="gm">gm</option>
+                <option value="ml">ml</option>
             </select>
+        </div>
+        <!-- No. of Items -->
+        <label for="numItems">No. of Items:</label>
+        <input type="number" id="numItems" name="numItems" required>
 
-            <label for="brand">Brand:</label>
-            <input type="text" id="brand_name" name="brand_name">
+        <!-- Image Uploads -->
+        <label for="image1">Image 1:</label>
+        <input type="file" id="image1" name="image1" accept="image/*" required>
 
-            <label for="sizeQuantity">Size/Quantity:</label>
-            <input type="number" id="sizeQuantity" name="sizeQuantity">
+        <label for="image2">Image 2:</label>
+        <input type="file" id="image2" name="image2" accept="image/*" required>
 
-            
-            <label for="petCompatibility">Pet Compatibility:</label>
-            <select id="petCompatibility" name="petCompatibility" required>
-                <option value="dogs">Dogs</option>
-                <option value="cats">Cats</option>
-                <option value="birds">Birds</option>
-               
-                <!-- Add more options as needed -->
-            </select>
-            
+        <label for="image3">Image 3:</label>
+        <input type="file" id="image3" name="image3" accept="image/*" required>
 
-            <label for="ageSizeSuitability">Age/Size Suitability:</label>
-            <input type="text" id="agesizesuitability" name="agesizesuitability">
+        <!-- Submit Button -->
+        <button type="submit">Add Product</button>
+    </form>
 
-           
-
-           
-
-            <label for="colorsVariations">Colors/Variations:</label>
-            <input type="text" id="colorsVariations" name="colorsVariations">
-
-            <button type="submit">Add Product</button>
-        </form>
-    </div>
-    
     <script>
-        const form = document.getElementById('product-form');
-        const productNameInput = document.getElementById('productName');
-        const productDescriptionInput = document.getElementById('productDescription');
-        const priceInput = document.getElementById('price');
-        const productImageInput = document.getElementById('productImage');
-        const productCategoryInput = document.getElementById('productCategory');
-
-        const productNameError = document.getElementById('productName-error');
-        const productDescriptionError = document.getElementById('productDescription-error');
-        const priceError = document.getElementById('price-error');
-        const productImageError = document.getElementById('productImage-error');
-        const productCategoryError = document.getElementById('productCategory-error');
-
-        document.getElementById('submit-button').addEventListener('click', function () {
-            validateProductName();
-            validateProductDescription();
-            validatePrice();
-            validateProductImage();
-            validateProductCategory();
-
-            // You can add similar validation functions for other fields here
-
-            if (
-                !productNameError.textContent &&
-                !productDescriptionError.textContent &&
-                !priceError.textContent &&
-                !productImageError.textContent &&
-                !productCategoryError.textContent
-            ) {
-                // If all fields are valid, submit the form
-                form.submit();
-            }
-        });
-
-        function validateProductName() {
-            const value = productNameInput.value.trim();
-            if (value === '') {
-                productNameError.textContent = 'Product Name is required';
-            } else {
-                productNameError.textContent = '';
-            }
-        }
-
-        function validateProductDescription() {
-            const value = productDescriptionInput.value.trim();
-            if (value === '') {
-                productDescriptionError.textContent = 'Product Description is required';
-            } else {
-                productDescriptionError.textContent = '';
-            }
-        }
-
-        function validatePrice() {
-            const value = priceInput.value;
-            if (isNaN(value) || value < 0) {
-                priceError.textContent = 'Price must be a positive number';
-            } else {
-                priceError.textContent = '';
-            }
-        }
-
-        function validateProductImage() {
-            const value = productImageInput.value.trim();
-            if (value === '') {
-                productImageError.textContent = 'Product Image URL is required';
-            } else {
-                productImageError.textContent = '';
-            }
-        }
-
-        function validateProductCategory() {
-            const value = productCategoryInput.value;
-            if (value === '') {
-                productCategoryError.textContent = 'Product Category is required';
-            } else {
-                productCategoryError.textContent = '';
-            }
-        }
-
-        // You can add similar validation functions for other fields here
-
+        // You can use JavaScript to populate product categories and subcategories dynamically based on user selections.
     </script>
-
-
-
-
-
 </body>
 </html>

@@ -31,22 +31,41 @@ class UserProfile(models.Model):
     addressline2= models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)
     city= models.CharField(max_length=15)
+   
     status=models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
 
-
-
-class Category(models.Model):
-
-
-    pet = models.CharField(max_length=10)
-    category_name = models.CharField(max_length=255, unique=True)
-    subcategory1 = models.CharField(max_length=255)
-    subcategory2 = models.CharField(max_length=255)
-    subcategory3 = models.CharField(max_length=255)
-    subcategory4 = models.CharField(max_length=255)
+class Wishlist(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product, blank=True)
 
     def __str__(self):
-        return self.category_name
+        return f"Wishlist of {self.user.email}"
+    
+
+
+
+
+
+class PetCategory(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class ProductCategory(models.Model):
+    pet_category = models.ForeignKey(PetCategory, on_delete=models.CASCADE)
+    category = models.CharField(max_length=100, default=None, null=True)
+
+    def __str__(self):
+        return self.category
+
+class ProductSubcategory(models.Model):
+    pet_category = models.ForeignKey(PetCategory, on_delete=models.CASCADE)
+    product_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, null=True)
+    sub_category = models.CharField(max_length=100, default=None, null=True)
+
+    def __str__(self):
+        return self.sub_category
