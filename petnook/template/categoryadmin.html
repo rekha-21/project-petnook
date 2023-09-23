@@ -4,7 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CATEGORY MANAGEMENT</title>
+    <style>
+        /* Reset some default styles */
+        body, h2, form {
+            margin: 0;
+            padding: 0;
+        }
 
+        /* Page background and font styles */
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Form container */
+        form {
+            background-color: #f5fcf5;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Form heading */
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #121519;
+        }
+
+        /* Label styles */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        /* Select styles */
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Input styles */
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Button styles */
+        button[type="submit"] {
+            background-color: #aceeb3;
+            color: #1a1616;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button hover effect */
+        button[type="submit"]:hover {
+            background-color: #35e046;
+        }
+    </style>
    
 </head>
 <body>
@@ -44,45 +117,102 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-{% comment %} 
     <script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        const petTypeSelect = $('#petType');
+        const subcategorySelect = $('#subcategory');
+        const addSubcategoryInput = $('#addSubcategory');
+        const addSubcategoryButton = $('#addSubcategoryButton');
+        
+        // Function to fetch and populate product categories based on the selected pet type
+        function populateProductCategories() {
+            const selectedPetCategoryId = petTypeSelect.val();
+            console.log(selectedPetCategoryId);
+
+            // Clear previous options
+            subcategorySelect.html('<option value="" disabled selected>Select</option>');
+
+            if (selectedPetCategoryId) {
+                // Make an AJAX request to fetch product categories for the selected pet category
+                $.ajax({
+                    url: "{% url 'getSubcategory' 0 %}".replace("0",selectedPetCategoryId),
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data); // Check the response data in the browser's console
+                    
+                        if (data.data) {
+                            const categories = JSON.parse(data.data); // Parse the JSON data
+                    
+                            // Clear previous options
+                            subcategorySelect.html('<option value="" disabled selected>Select</option>');
+                    
+                            // Populate the subcategory dropdown with the fetched data
+                            categories.forEach(function(category) {
+                                console.log(category)
+                                const option = $('<option></option>')
+                                    .val(category.fields.pet_category) // Use the pet_category field as the value
+                                    .text(category.fields.category); // Use the category field as the text
+                                subcategorySelect.append(option);``
+                            });
+                    
+                            // Show the subcategory dropdown
+                            $('#subcategoryContainer').css('display', 'block');
+                        } else {
+                            // Handle the case when there is no data returned
+                            console.error('No data received.');
+                        }
+                    },
+                });
+            } else {
+                // Hide the subcategory dropdown if no pet category is selected
+                $('#subcategoryContainer').css('display', 'none');
+            }
+        }
+
+        // Function to add a new subcategory
+        function addSubcategory() {
+            const newSubcategory = addSubcategoryInput.val().trim();
+
+            if (newSubcategory) {
+                // Create a new option in the subcategory dropdown
+                const option = $('<option></option>');
+                option.val(newSubcategory.toLowerCase().replace(/ /g, '-'));
+                option.text(newSubcategory);
+                subcategorySelect.append(option);
+
+                // Clear the input field
+                addSubcategoryInput.val('');
+            }
+        }
+
+        // Add event listeners
+        petTypeSelect.on('change', populateProductCategories);
+        addSubcategoryButton.on('click', addSubcategory);
+
+        // Call populateProductCategories initially to set the initial state of the subcategory dropdown
+        populateProductCategories();
+    });
+</script>
+
+
+    </script>
+    <!-- <script>
         const petTypeSelect = document.getElementById('petType');
+        
+
         const subcategoryContainer = document.getElementById('subcategoryContainer');
         const subcategorySelect = document.getElementById('subcategory');
         const addSubcategoryContainer = document.getElementById('addSubcategoryContainer');
         const addSubcategoryInput = document.getElementById('addSubcategory');
         const addSubcategoryButton = document.getElementById('addSubcategoryButton');
-    
+        
         // Function to fetch and populate product categories based on the selected pet type
-        function populateProductCategories() {
-            const selectedPetCategoryId = petTypeSelect.value;
-    
-            // Clear previous options
-            subcategorySelect.innerHTML = '<option value="" disabled selected>Select</option>';
-    
-            if (selectedPetCategoryId) {
-                // Make an AJAX request to fetch product categories for the selected pet category
-                fetch(`/get_product_categories/${selectedPetCategoryId}`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        data.forEach((category) => {
-                            const option = document.createElement('option');
-                            option.value = category.id;
-                            option.textContent = category.category;
-                            subcategorySelect.appendChild(option);
-                        });
-    
-                        // Show the subcategory dropdown
-                        subcategoryContainer.style.display = 'block';
-                    })
-                    .catch((error) => {
-                        console.error('Error fetching product categories:', error);
-                    });
-            } else {
-                // Hide the subcategory dropdown if no pet category is selected
-                subcategoryContainer.style.display = 'none';
-            }
-        }
+        
     
         // Function to add a new subcategory
         function addSubcategory() {
@@ -106,7 +236,7 @@
     
         // Call populateProductCategories initially to set the initial state of the subcategory dropdown
         populateProductCategories();
-    </script>
-     {% endcomment %}
+    </script> -->
+     
 </body>
 </html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meesho-like Dropdown</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset some default styles */
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the navbar */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.nav-list {
+    display: flex;
+    list-style-type: none;
+    margin-left: 20px;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+/* Style the dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content li {
+    padding: 10px;
+}
+
+/* Show the dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="#">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#">Products</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">Category 1</a></li>
+                    <li><a href="#">Category 2</a></li>
+                    <li><a href="#">Category 3</a></li>
+                    <li><a href="#">Category 4</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="#">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+    <script src="script.js"></script>
+</body>
+</html>

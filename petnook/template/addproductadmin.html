@@ -1,137 +1,229 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product</title>
 
+    
+    
     <style>
-        /* Basic styling for the form container */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+        /* Reset some default styles */
+        body, h2, form {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
-        .form-container {
-            background-color: #fff;
+        /* Page background and font styles */
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Form container */
+        form {
+            background-color: #f5fcf5;
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        /* Add additional styling for labels, inputs, and buttons here */
+        /* Form heading */
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #121519;
+        }
+
+        /* Label styles */
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: bold;
         }
 
+        /* Input and select styles */
         input[type="text"],
         input[type="number"],
         select,
         textarea,
-        input[type="file"] {
+        input[type="file"],
+        select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 5px;
+            font-size: 16px;
         }
 
         select {
-            appearance: none; /* Remove default styles on select */
+            appearance: none;
+            background-color: #fff;
+            background-image: url("path-to-down-arrow-icon.png");
+            background-repeat: no-repeat;
+            background-position: right center;
+            padding-right: 40px;
         }
 
+        /* Price container */
+        .quantity-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quantity-container input[type="number"] {
+            width: 500%;
+        }
+        
+        /* Submit button styles */
         button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
+            background-color: #aceeb3;
+            color: #1a1616;
+            padding: 14px 24px;
             border: none;
-            border-radius: 3px;
+            border-radius: 5px;
+            font-size: 18px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        /* Validation styles */
-        .error {
-            color: #ff0000;
-            font-size: 12px;
+        /* Button hover effect */
+        button[type="submit"]:hover {
+            background-color: #35e046;
         }
+
+        /* Stylish file input */
+        input[type="file"] {
+            border: none;
+            padding: 0;
+            background-color: transparent;
+        }
+
+        /* Additional styles can be added as needed */
     </style>
 </head>
 <body>
-    <h2>Add Product</h2>
-    <form action="{% url 'add_product' %}" method="post" enctype="multipart/form-data">
+    
+    <form action="{% url 'add_product' %}" method="post"  enctype="multipart/form-data">
         {% csrf_token %}
+        <h2><b>ADD PRODUCT</b></h2>
+        <div style="display: flex;">
+            <div style="min-width:50%;padding-right: 10px;">
+                <!-- Choose a Pet -->
+                <label for="petType">Choose a Pet:</label>
+                <select id="petType" name="petType">
+                    <option value="" disabled selected>--Select--</option>
+                    {% for pet_category in pet_categories %}
+                    <option value="{{ pet_category.id }}">{{ pet_category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div style="min-width:50%">
+                <!-- Select Product Category -->
+                <label for="productCategory">Select Product Category:</label>
+                <select id="category" name="category">
+                    <option value="" disabled selected>Select</option>
+                    {% for product_category in product_categories %}
+                    <option value="{{ product_category.id}}">{{ product_category.category }}</option>
+                    <script> console.log(product_category.category)</script>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
 
-        <!-- Choose a Pet -->
-        <label for="petType">Choose a Pet:</label>
-        <select id="petType" name="petType">
-            <option value="dog">Dog</option>
-            <option value="cat">Cat</option>
-            <option value="bird">Bird</option>
-        </select>
+        <div style="display: flex;">
+            <div style="min-width:50%;padding-right: 10px;">
+                <!-- Select Product Subcategory -->
 
-        <!-- Select Product Category -->
-        <label for="productCategory">Select Product Category:</label>
-        <select id="productCategory" name="productCategory">
-            <!-- Populate this dynamically based on the selected pet type using JavaScript -->
-        </select>
+                <label for="productSubcategory">Select Product Subcategory:</label>
+                <select id="productSubcategory" name="productSubcategory">
+                    <option value="" disabled selected>-----Select-----</option>
 
-        <!-- Select Product Subcategory -->
-        <label for="productSubcategory">Select Product Subcategory:</label>
-        <select id="productSubcategory" name="productSubcategory">
-            <!-- Populate this dynamically based on the selected product category using JavaScript -->
-        </select>
+                    {% for sub in product_subcategories %}
 
-        <!-- Product Name -->
-        <label for="productName">Product Name:</label>
-        <input type="text" id="productName" name="productName" required>
-
+                    <option value="{{ sub.id}}"  >{{ sub.sub_category }}</option>
+                    <!-- Populate this dynamically based on the selected product category using JavaScript -->
+                    {% endfor %}
+                    </select>
+            </div>
+            <div style="min-width:50%">
+                <!-- Product Name -->
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+        </div>
+    
+    <div>
         <!-- Product Description -->
         <label for="productDescription">Product Description:</label>
         <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
+    </div>
 
+    <div style="display: flex;">
+        <div style="min-width:50%;padding-right: 10px;">
         <!-- Brand Name -->
-        <label for="brandName">Brand Name:</label>
-        <input type="text" id="brandName" name="brandName">
+            <label for="brandName">Brand Name:</label>
+            <input type="text" id="brandName" name="brandName">
+        </div>
+        <div style="min-width:50%">
+        <!-- No. of Items -->
+            <label for="numItems">No. of Items:</label>
+            <input type="number" id="numItems" name="numItems" required>
+        </div>
+    </div>
 
-        <!-- Price -->
-        <label for="price">Price:</label>
-        <div>
-            <input type="number" id="priceValue" name="priceValue" step="" required inputmode="numeric">
-            <select id="priceUnit" name="priceUnit">
+<div style="display: flex;">
+       <div style="min-width:50%;padding-right: 10px;">
+        <!-- quantity -->
+        <label for="quantity">Quantity:</label>
+        <div class="quantity-container">
+          
+            <select id="unit" name="unit" style="width: 400px; padding-right: 7px;">
+                <option value="" disabled selected>--Weight--</option>
                 <option value="gm">gm</option>
                 <option value="ml">ml</option>
             </select>
+            <input type="number" id="quantityValue" name="quantityValue" step="" required inputmode="numeric">
+            
         </div>
+        </div>
+        <div style="min-width:50%">
         <!-- No. of Items -->
-        <label for="numItems">No. of Items:</label>
-        <input type="number" id="numItems" name="numItems" required>
+            <label for="price">Price :</label>
+            <input type="number" id="price" name="price" required>
+        </div>
+    </div>
+    
 
+<div style="display: flex;">
+    <div style="min-width:50%;padding-right: 10px;">
         <!-- Image Uploads -->
         <label for="image1">Image 1:</label>
         <input type="file" id="image1" name="image1" accept="image/*" required>
-
+    </div>
+    <div style="min-width:50%">
         <label for="image2">Image 2:</label>
         <input type="file" id="image2" name="image2" accept="image/*" required>
+    </div>
+</div>
 
+<div style="display: flex;">
+    <div style="min-width:50%;padding-right: 10px;">
         <label for="image3">Image 3:</label>
         <input type="file" id="image3" name="image3" accept="image/*" required>
-
+    </div>
+    <div style="min-width:50%" >
         <!-- Submit Button -->
         <button type="submit">Add Product</button>
+    </div>
+</div>
     </form>
 
     <script>
-        // You can use JavaScript to populate product categories and subcategories dynamically based on user selections.
     </script>
 </body>
 </html>

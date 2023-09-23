@@ -1,26 +1,26 @@
 from django.db import models
 from loginapp.models import CustomUser
-class Product(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
-    product_name = models.CharField(max_length=255, null=True)
-    product_description = models.TextField(max_length=255, null=True)
-    price = models.CharField(max_length=255, null=True)
-    product_images1 = models.FileField(upload_to='sample/', null=True, blank=True, max_length=255)
-    product_images2 = models.FileField(upload_to='sample/', null=True, blank=True, max_length=255)
-    product_images3 = models.FileField(upload_to='sample/', null=True, blank=True, max_length=255)
-    category = models.CharField(max_length=255, null=True)
-    subcategory = models.CharField(max_length=255, null=True)
-    brand_name = models.CharField(max_length=255, null=True)
-    sizeQuantity = models.CharField(max_length=255, null=True)
-    petCompatibility = models.CharField(max_length=255, null=True)
-    agesizesuitability = models.CharField(max_length=255, null=True)
-    colorsVariations = models.CharField(max_length=255, null=True)
-      # You can create a separate Category model if needed
+# class Product(models.Model):
+#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
+#     product_name = models.CharField(max_length=255, null=True)
+#     product_description = models.TextField(max_length=255, null=True)
+#     price = models.CharField(max_length=255, null=True)
+#     product_images1 = models.FileField(upload_to='sample/', null=True, blank=True, max_length=255)
+#     product_images2 = models.FileField(upload_to='sample/', null=True, blank=True, max_length=255)
+#     product_images3 = models.FileField(upload_to='sample/', null=True, blank=True, max_length=255)
+#     category = models.CharField(max_length=255, null=True)
+#     subcategory = models.CharField(max_length=255, null=True)
+#     brand_name = models.CharField(max_length=255, null=True)
+#     sizeQuantity = models.CharField(max_length=255, null=True)
+#     petCompatibility = models.CharField(max_length=255, null=True)
+#     agesizesuitability = models.CharField(max_length=255, null=True)
+#     colorsVariations = models.CharField(max_length=255, null=True)
+#       # You can create a separate Category model if needed
    
-    status=models.BooleanField(default=False)
+#     status=models.BooleanField(default=False)
 
-    def str(self):
-        return self.product_name
+#     def str(self):
+#         return self.product_name
     
 class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
@@ -37,12 +37,12 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-class Wishlist(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, blank=True)
+# class Wishlist(models.Model):
+#     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+#     products = models.ManyToManyField(Product, blank=True)
 
-    def __str__(self):
-        return f"Wishlist of {self.user.email}"
+#     def __str__(self):
+#         return f"Wishlist of {self.user.email}"
     
 
 
@@ -50,7 +50,7 @@ class Wishlist(models.Model):
 
 
 class PetCategory(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,null=True)
 
     def __str__(self):
         return self.name
@@ -69,3 +69,22 @@ class ProductSubcategory(models.Model):
 
     def __str__(self):
         return self.sub_category
+
+
+class Product(models.Model):
+    pet_type = models.ForeignKey('PetCategory', on_delete=models.CASCADE)
+    product_category = models.ForeignKey('ProductCategory', on_delete=models.CASCADE)
+    product_subcategory = models.ForeignKey('ProductSubcategory', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    brand_name = models.CharField(max_length=255, blank=True, null=True)
+    unit = models.CharField(max_length=255, blank=True, null=True)
+    num_items = models.PositiveIntegerField()
+    quantity_value = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    image1 = models.ImageField(upload_to='product_images/')
+    image2 = models.ImageField(upload_to='product_images/')
+    image3 = models.ImageField(upload_to='product_images/')
+
+    def __str__(self):
+        return self.name
