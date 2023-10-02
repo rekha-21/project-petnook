@@ -87,7 +87,10 @@
 	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
 	        	<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
 	        	
-	        	<li class="nav-item"><a href="{% url 'customerproduct' %}" class="nav-link">Product</a></li>
+	        	<li class="nav-item"><a href="{% url 'customerproduct' %}" class="nav-link">Product</a>
+				
+				</li>
+				
 	          
 	          <li class="nav-item text-primary"><a href="" class="nav-link">Services</a></li>
 
@@ -253,21 +256,7 @@
       <div class="container">
         <div class="row justify-content-center pb-5 mb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1><b>Shop By Pets</b></h1>
-          </div>
-        </div>
-        <div class="row ftco-animate">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel ftco-owl" style="background-color: white;">
-				<div class="item" ><a href="{% url 'displayBird' %}">
-					<img src="{% static 'images/bird.jpg' %}" alt="Image Alt Text" class="img-fluid"></a>
-				</div>
-				<div class="item" ><a href="{% url 'displayCat' %}">
-    			<img src="{% static 'images/cat.jpg' %}" alt="Image Alt Text" class="img-fluid"></a>
-</div>
-<div class="item" ><a href="{% url 'displayDog' %}">
-	<img src="{% static 'images/dog.jpg' %}" alt="Image Alt Text" class="img-fluid"></a>
-</div>
+          
 </div>
               
              

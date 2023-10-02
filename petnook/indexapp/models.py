@@ -37,12 +37,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-# class Wishlist(models.Model):
-#     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-#     products = models.ManyToManyField(Product, blank=True)
-
-#     def __str__(self):
-#         return f"Wishlist of {self.user.email}"
     
 
 
@@ -80,11 +74,32 @@ class Product(models.Model):
     brand_name = models.CharField(max_length=255, blank=True, null=True)
     unit = models.CharField(max_length=255, blank=True, null=True)
     num_items = models.PositiveIntegerField()
-    quantity_value = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity_value = models.CharField(max_length=10,null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     image1 = models.ImageField(upload_to='product_images/')
     image2 = models.ImageField(upload_to='product_images/')
     image3 = models.ImageField(upload_to='product_images/')
-
+    m=models.BooleanField(max_length=255,default=1)
     def __str__(self):
         return self.name
+    
+class Wishlist1(models.Model):
+    user=models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
+    status=models.BooleanField(default=False)
+    
+    def str(self):
+        # return self.book.title
+        return f"wishlist details {self.user.email}: {self.product.product_name}"
+
+
+class Cart(models.Model):
+    user=models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
+    status=models.BooleanField(default=False)
+    quantity = models.PositiveIntegerField(default=1, null=True)
+    
+    def str(self):
+        # return self.book.title
+        return f"cart details {self.user.email}: {self.product.product_name}"
+    

@@ -1,502 +1,323 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Pet Sitting - Free Bootstrap 4 Template by Colorlib</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- 
-    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
-    
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-
-
-    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  </head>
-  <body>
-
-    <style>
-		/* Add font-awesome for icons */
-		@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-		
-		/* Reset some default styling */
-		footer {
-		  background-color: #5e615f;
-		  color: #fff;
-		  padding: -10px 0; /* Reduced padding */
-		  font-family: Arial, sans-serif;
-		}
-		
-		.footer-container {
-		  max-width: 1200px;
-		  margin: 0 auto;
-		  display: flex;
-		  justify-content: space-between;
-		  flex-wrap: wrap;
-		}
-		
-		.footer-section {
-		  flex: 1;
-		  margin-right: 20px;
-		  padding: 10px;
-		}
-		
-		/* Style headings in green and make them bold */
-		.footer-section h3 {
-		  font-size: 18px;
-		  margin-bottom: 10px;
-		  text-transform: uppercase;
-		  color: #1db546;
-		  font-weight: bold; /* Added bold style */
-		}
-		
-		/* Style content in white */
-		.footer-section p {
-		  font-size: 14px;
-		  line-height: 1.4;
-		  color: #fff; /* Green color */
-		}
-		
-		.footer-section ul {
-		  list-style-type: none;
-		  padding: 0;
-		}
-		
-		.footer-section ul li {
-		  margin-bottom: 5px;
-		}
-		
-		.footer-section ul li a {
-		  color: #fff;
-		  text-decoration: none;
-		}
-		
-		/* Phone and Social Icons */
-		.fa {
-		  font-size: 18px;
-		  margin-right: 5px;
-		}
-		
-		.social-icons a {
-		  color: #fff;
-		  text-decoration: none;
-		}
-		
-		/* Responsive design for smaller screens */
-		@media (max-width: 768px) {
-		  .footer-container {
-			flex-direction: column;
-			align-items: center;
-		  }
-		  
-		  .footer-section {
-			margin-right: 0;
-			margin-bottom: 20px;
-			text-align: center;
-		  }
-		}
-	  
-	  
-	  
-	  
-		
-		
-		  
-	  
-		</style>
-				
-		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container-fluid">
-			<a class="navbar-brand " href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>PETNOOK</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="fa fa-bars"></span> Menu
-	      </button>
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	        	<a href="{% url 'addproductadmin' %}" class="nav-link"><li class="nav-item">Add product</a></li>
-	        	
-	        	<li class="nav-item"><a href="{% url 'viewproduct' %}" class="nav-link">View product</a></li>
-	          
-	          
-			  {% comment %} <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"> {% endcomment %}
-				
-				{% comment %} <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px">  {% endcomment %}
-			  </li>
-        {% if  user.is_authenticated %}
-
-          <li><a href="#" class="nav-link ml-4 text-success"><b>{{user.name}}</b></a></li>
-                <li><a href="{% url 'logout' %}" class="nav-item nav-link text-success">Log Out</a></li>
-          {% comment %} {% else %}
-          <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
-          <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
-     {% endcomment %}
-                {% endif %}
-          </ul>
-
-
-	      </div>
-	    </div>
-	  </nav>
-    <!-- END nav -->
-
-
-	<nav class="navbar navbar-expand-lg bg-light " style="10px;padding-left:500px;">
-		<div class="container">
-		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-		  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				
-			
-			  
-			  
-{% comment %} 			
-			<li><a href="#" class="nav-link ml-4"><b>{{user.name}}</b></a></li>
-			{% if  user.is_authenticated %}
-            <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
-			{% else %}
-			<li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
-			<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
-
-            {% endif %} {% endcomment %}
-			</ul>
-
-		  </div>
-		</div>
-		
-	  </nav>
-{% comment %} {% load static %}
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-  />
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
-  />
-  
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-  />
+    <title>Add Product</title>
 
-    <title>Update Product</title>
-    <!-- Bootstrap CSS link (you need to replace this with the actual Bootstrap CSS file link) -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    
+    <style>
+        /* Reset some default styles */
+        body, h2, form {
+            margin: 0;
+            padding: 0;
+        }
 
-    <!-- Icon Font CSS -->
-    <link rel="stylesheet" href="{% static 'assets/css/simple-line-icons.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/ionicons.min.css' %}">
-    
-    <!-- Plugins CSS -->
-    <link rel="stylesheet" href="{% static 'assets/css/plugins.css' %}">
-    
-    <!-- Main Style CSS -->
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        /* Page background and font styles */
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
 
-    <link rel="stylesheet" href="{% static 'assets/css/search.css' %}">
-    
+        /* Form container */
+        form {
+            background-color: #f5fcf5;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Form heading */
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #121519;
+        }
+
+        /* Label styles */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        /* Input and select styles */
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea,
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        select {
+            appearance: none;
+            background-color: #fff;
+            background-image: url("path-to-down-arrow-icon.png");
+            background-repeat: no-repeat;
+            background-position: right center;
+            padding-right: 40px;
+        }
+
+        /* Price container */
+        .quantity-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quantity-container input[type="number"] {
+            width: 500%;
+        }
+        
+        /* Submit button styles */
+        button[type="submit"] {
+            background-color: #aceeb3;
+            color: #1a1616;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button hover effect */
+        button[type="submit"]:hover {
+            background-color: #35e046;
+        }
+
+        /* Stylish file input */
+        input[type="file"] {
+            border: none;
+            padding: 0;
+            background-color: transparent;
+        }
+
+        /* Additional styles can be added as needed */
+    </style>
 </head>
-<script>
-  $(document).ready(function () {
-    $("#product_name").keyup(function () {
-      validatepName("#product_name");
-    });
-    $("#price").keyup(function () {
-      validateprice("#price");
-    });
-    $("#quantity").keyup(function () {
-      validatequantity("#quantity");
-    });
-
-  });
-
-  function validatepName(fieldId) {
-    var name = $(fieldId).val();
-    var lettersWithSpaces = /^[A-Za-z\s]+$/;
-    var submitButton = $("#btn1");
-    if (name.trim() === "") {
-      $("#product_namespan").html("Enter the Name").css("color", "red");
-      submitButton.prop("disabled", true);
-      return false
-    } else if (!lettersWithSpaces.test(name)) {
-      $("#product_namespan").html("Name field required only alphabet characters with spaces").css("color", "red");
-      submitButton.prop("disabled", true);
-      return false
-    } else {
-      $("#product_namespan").html("");
-      submitButton.prop("disabled", false);
-      return true
-    }
-  }
-  //   price validation
-
-  function validateprice(fieldId) {
-    var name = $(fieldId).val();
-    var lettersWithSpaces =  /^-?\d+$/ ;
-    var submitButton = $("#btn1");
-    if (name.trim() === "") {
-      $("#ownspan").html("Enter the Price").css("color", "red");
-      submitButton.prop("disabled", true);
-      return false
-    } else if (!lettersWithSpaces.test(name)) {
-      $("#ownspan").html("Price must contain only integer values").css("color", "red");
-      submitButton.prop("disabled", true);
-      return false
-    } else {
-      $("#ownspan").html("");
-      submitButton.prop("disabled", false);
-      return true
-    }
-  }
-  
-  
-  function validatequantity(fieldId) {
-    var name = $(fieldId).val();
-    var lettersWithSpaces =  /^-?\d+$/ ;
-    var submitButton = $("#btn1");
-    if (name.trim() === "") {
-      $("#qnspan").html("Enter the Quantity").css("color", "red");
-      submitButton.prop("disabled", true);
-      return false
-    } else if (!lettersWithSpaces.test(name)) {
-      $("#qnspan").html("Quantity must contain only integer values").css("color", "red");
-      submitButton.prop("disabled", true);
-      return false
-    } else {
-      $("#qnspan").html("");
-      submitButton.prop("disabled", false);
-      return true
-    }
-  }
-</script>
-
-</html>
 <body>
-  
-  <div class="header-area">
-    <div class="header-bottom-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-5 col-5 d-flex mt-2">
-                    <div class="logo " style="margin-top: 20px;  margin-right: 180px;">
-                        <a href="{% url 'index' %}">
-                           
+    
+    
+    <script>
+    </script>
+</body>
+</html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="{% static 'admin1/img/logo/logo.png' %}" rel="icon">
+  <title>PETNOOKAdmin - Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="{% static 'admin1/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'admin1/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'admin1/css/ruang-admin.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+</head>
+
+<body id="page-top">
+  <div id="wrapper" >
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" style="background-color:#419e5b" href="index.html">
+        <div class="sidebar-brand-icon">
+          <span class="flaticon-pawprint-1 mr-2"></span>
+        </div>
+        <div class="sidebar-brand-text mx-3 " >PETNOOK</div>
+        
+      </a>
+      <hr class="sidebar-divider my-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'indexadmin' %}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+     
+    
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">
+        Actions
+      </div>
+      
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'category_management' %}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Category Management</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'add_product' %}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Add Product</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'viewproduct' %}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Product Management</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+    
+    </ul>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top bg-success">
+          <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                aria-labelledby="searchDropdown">
+                <form class="navbar-search" >
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
+                      aria-label="Search" aria-describedby="basic-addon2" style="border-color: #66e684;">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button" style="background-color:#419e5b">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
                     </div>
-                    <div class="search mt-4" style="width:500px;">
-                       <h2 class="text-uppercase"><B> Update Product</B></h2>
-                    </div> 
-                    
-                </div>
-                <div class="col-lg-4 d-none d-lg-block ">
-                    	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container-fluid">
-			<a class="navbar-brand " href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>PETNOOK</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="fa fa-bars"></span> Menu
-	      </button>
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	        	<a href="{% url 'addproductadmin' %}" class="nav-link"><li class="nav-item">Add product</a></li>
-	        	
-	        	<li class="nav-item"><a href="" class="nav-link">View product</a></li>
-	          
-	          
-			  {% comment %} <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link"> {% endcomment %}
-				
-				{% comment %} <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px">  {% endcomment %}
-			  </li>
-        {% if  user.is_authenticated %}
-
-          {% comment %} <li><a href="#" class="nav-link ml-4 text-success"><b>{{user.name}}</b></a></li>
-                <li><a href="{% url 'logout' %}" class="nav-item nav-link text-success">Log Out</a></li> {% endcomment %}
-          {% comment %} {% else %}
-          <li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
-          <img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
-     {% endcomment %}
-                {% endif %}
+                  </div>
+                </form>
+              </div>
+            </li>
+           
+            
+           
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-person-check-fill"></i>
+                <span class="ml-2 d-none d-lg-inline text-white small">Admin</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+              
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal" >
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
+                  Logout
+                </a>
+              </div>
+            </li>
           </ul>
+        </nav>
+        <!-- Topbar -->
 
-
-	      </div>
-	    </div>
-	  </nav>
-    <!-- END nav -->
-
-
-	<nav class="navbar navbar-expand-lg bg-light " style="10px;padding-left:500px;">
-		<div class="container">
-		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-		  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				
-			
-			  
-			  
-{% comment %} 			
-			<li><a href="#" class="nav-link ml-4"><b>{{user.name}}</b></a></li>
-			{% if  user.is_authenticated %}
-            <li><a href="{% url 'logout' %}" class="nav-item nav-link">Log Out</a></li>
-			{% else %}
-			<li class="nav-item  ml-4"><a href="{% url 'login' %}" class="nav-link">
-			<img src="{% static 'images/h-u-icon.png' %}" alt="hai"  width="20px"> 
-
-            {% endif %} {% endcomment %}
-			</ul>
-		  </div>
-		</div>
-		
-	  </nav>
-                </div>
+        <!-- Container Fluid-->
+        <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2><b>UPDATE PRODUCT</b></h2>
+            <div style="display: flex;">
                 
+                
+            </div>
+    
+            <div style="display: flex;">
+              {% for i in stid1 %}
+                <div style="min-width:50%">
+                    <!-- Product Name -->
+                    <label for="productName">Product Name:</label>
+                    <input type="text" id="productName" name="productName" value="{{i.name}}" required>
+                </div>
+            </div>
+        
+        <div>
+            <!-- Product Description -->
+            <label for="productDescription">Product Description:</label>
+            <textarea id="productDescription" name="productDescription"  rows="4" required>{{i.description}}</textarea>
+        </div>
+    
+        <div style="display: flex;">
+            <div style="min-width:50%;padding-right: 10px;">
+            <!-- Brand Name -->
+                <label for="brandName">Brand Name:</label>
+                <input type="text" id="brandName" name="brandName" value="{{i.brand_name}}">
+            </div>
+            <div style="min-width:50%">
+            <!-- No. of Items -->
+                <label for="numItems">No. of Items:</label>
+                <input type="number" id="numItems" name="numItems" value="{{i.num_items}}" required>
             </div>
         </div>
-    </div>
-</div>
-<!-- header-area end --> 
-   
-  
     
-<section class="gray pt-5 pb-5">
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-lg-9 col-md-8" >
-        <div class="dashboard-body">
-          <div class="dashboard-wraper">
-            <div class="row">
-              <div class="col-lg-12 col-md-12">
-                <div class="submit-page px-0">
-                <div class="frm_submit_block  ">
-                  <div class="frm_submit_wrap">
-                     
-        <form method="POST">
-          {% for i in stid1 %}
-            {% csrf_token %}
-            <div class="row">
-                        
-              <div class="form-group col-md-6 pd-20"> 
-                <label for="brandName">Brand Name:</label>
-                <input type="text" class="form-control" id="brand_name" name="brand_name" value="{{ i.brand_name }}" required>
-                <span id="product_namespan"></span>
-              </div>
-                
-              <div class="form-group col-md-6 pd-20"> 
-                <label for="productName">Product Name:</label>
-                <input type="text" class="form-control" id="product_name" name="product_name" value="{{ i.product_name }}" required>
-                <span id="product_namespan"></span>
-              </div>
-                   
-              <div class="form-group col-md-6 pd-20"> 
-                <label for="productPrice">Price:</label>
-                <input type="text" class="form-control" id="price" name="price" step="0.01" value="{{ i.price }}" required>
-                <span id="ownspan"></span>
-              </div>
+    <div style="display: flex;">
+           <div style="min-width:50%;padding-right: 10px;">
+            <!-- quantity -->
+            <label for="quantity">Quantity:</label>
+            <div class="quantity-container">
               
-              <div class="form-group col-md-6 pd-20"> 
-                <label for="sizeQuantity">Quantity:</label>
-                <input type="text" class="form-control" id="sizeQuantity" name="sizeQuantity" value="{{ i.sizeQuantity }}"  required>
-                <span id="qnspan"></span>
-              </div>
-
-              <div class="form-group col-md-6 pd-20"> 
-                <label for="agesizesuitability">Age:</label>
-                <input type="text" class="form-control" id="agesizesuitability" name="agesizesuitability" value="{{ i.agesizesuitability }}" required>
-                <span id="product_namespan"></span>
-              </div>
-                    
-              <div class="form-group col-md-6 pd-20"> 
-                <label for="colorsVariations">Colour:</label>
-                <input type="text" class="form-control" id="colorsVariations" name="colorsVariations" value="{{ i.colorsVariations }}" required>
-                <span id="product_namespan"></span>
-              </div>
-
-              <div class="form-group col-md-6 pd-20"> 
-                     <label for="productCategory">Product Category:</label>
-                <select class="form-control" id="category" name="category" required>
-                    <option value={{ i.category }}>{{ i.category }}</option>
-                    {% for i in stdata %}
-                    
-                    <option value={{ i.category_name }}>{{ i.category_name }}</option>
-                    
-                    {% endfor %}
-                    
-                    <!-- Add more options as needed -->
+                <select id="unit" name="unit" style="width: 400px; padding-right: 7px;">
+                    <option value="" disabled selected>--Weight--</option>
+                    <option value="gm">gm</option>
+                    <option value="ml">ml</option>
                 </select>
-              </div>
-                                
-              <div class="form-group col-md-6 pd-20"> 
-                <label for="productCategory">Product Sub Category:</label>
-              <select class="form-control" id="subcategory" name="subcategory"  required>
-                <option value={{ i.subcategory }}>{{ i.subcategory }}</option>
-                  {% for i in stdata %}
-                  <option value={{ i.subcategory1 }}>{{ i.subcategory1 }}</option>
-                  
-                  <option value={{ i.subcategory2 }}>{{ i.subcategory2 }}</option>
-                  
-                  <option value={{ i.subcategory3 }}>{{ i.subcategory3 }}</option>
-
-                  <option value={{ i.subcategory4 }}>{{ i.subcategory4 }}</option>
-                  {% endfor %}
-                  
-                  <!-- Add more options as needed -->
-              </select>
-            </div>
-                             
-                     
-               
-              <div class="form-group col-md-6 pd-20"> 
-                <label for="productDescription">Product Description:</label>
-                <textarea class="form-control" id="product_description" name="product_description"   rows="4" required>{{ i.product_description }}</textarea>
-              </div>         
-                    </div>
+                <input type="number" id="quantityValue" name="quantityValue" value="{{i.quantity_value}}" step="" required inputmode="numeric">
                 
-            
-                  </div>
-                </div>
-                {% endfor %}
-            <button type="submit" class="btn btn-light btn-l" style="margin-left: 35%;">Update Product</button>
+            </div>
+            </div>
+            <div style="min-width:50%">
+            <!-- No. of Items -->
+                <label for="price">Price :</label>
+                <input type="number" id="price" name="price" value="{{i.price}}"required>
+            </div>
+        </div>
+        
+    {% endfor %}
+    
+    
+    <div style="display: flex;">
+        
+        <div style="min-width:50%" >
+            <!-- Submit Button -->
+            <button type="submit">Update Product</button>
+        </div>
+    </div>
         </form>
-      </div></div></div></div></div></div></div>
-<!--       
-    {{ user.email }}
-    {% for i in stdata %}
-                    {{ i.category_name }}
-                    
-                    {% endfor %} -->
-    <!-- Bootstrap JS and jQuery (you need to include these scripts) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+        <!---Container Fluid-->
+      </div>
+    </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
-     
-      
-
-  
+  <script src="{% static 'admin1/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'admin1/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'admin1/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'admin1/js/ruang-admin.min.js' %}"></script>
+  <script src="{% static 'admin1/vendor/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'admin1/js/demo/chart-area-demo.js' %}"></script>  
 </body>
+
 </html>

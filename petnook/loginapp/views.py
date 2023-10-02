@@ -91,7 +91,7 @@ def login(request):
                 return redirect('http://127.0.0.1:8000/sellerpage/')
             else:
                 auth.login(request,user)
-                return redirect('http://127.0.0.1:8000/registration/landing/')
+                return redirect('http://127.0.0.1:8000/indexadmin')
 
     return render (request,'login.html')
 def logout(request):
